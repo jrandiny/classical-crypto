@@ -12,11 +12,11 @@ class Data:
         self.data_type = data_type
         self._data = data
 
-    def get_text() -> str:
+    def get_text(self) -> str:
         assert self.data_type == DataType.TEXT
         return self._data
 
-    def get_file() -> TextIO:
+    def get_file(self) -> TextIO:
         assert self.data_type == DataType.FILE
         abc = open('asdas', 'r')
         return self._data
