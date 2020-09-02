@@ -22,7 +22,7 @@ dependencies:
   - xz=5.2.5=h7b6447c_0
   - zlib=1.2.11=h7b6447c_3
   - pip:
-    - numpy==1.19.1
-    - pyqt5==5.15.0
-    - pyqt5-sip==12.8.1
-
+      - numpy==1.19.1
+      - pyqt5==5.15.0
+      - pyqt5-sip==12.8.1
+      - yapf==0.30.0
