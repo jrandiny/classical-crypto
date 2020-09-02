@@ -1,7 +1,12 @@
 import textwrap
+import re
 
 
 class StringUtil:
+    @staticmethod
+    def strip_non_alphabet(input: str) -> str:
+        return re.sub("[^a-zA-Z]+", "", input)
+
     @staticmethod
     def remove_space(input: str) -> str:
         return input.replace(' ', '')
