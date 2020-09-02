@@ -13,6 +13,9 @@ class EngineCapabilities:
 
 
 class BaseEngine(ABC):
+    def __init__(self, engine_capabilities: EngineCapabilities):
+        self.capabilities = engine_capabilities
+
     @abstractmethod
     def encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
@@ -21,9 +24,4 @@ class BaseEngine(ABC):
     @abstractmethod
     def decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
-        pass
-
-    @abstractmethod
-    def get_capabilities(self) -> EngineCapabilities:
-        """Get engine capabilities"""
         pass
