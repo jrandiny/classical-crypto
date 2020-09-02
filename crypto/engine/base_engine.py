@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from engine.data import Data
-from engine.key import KeyType, Key
+from crypto.engine.data import Data
+from crypto.engine.key import KeyType, Key
+
 
 @dataclass
 class EngineCapabilities:
@@ -13,12 +14,12 @@ class EngineCapabilities:
 
 class BaseEngine(ABC):
     @abstractmethod
-    def encrypt(self, data: Data): Data:
+    def encrypt(self, data: Data) -> Data:
         """Encrypt data"""
         pass
 
     @abstractmethod
-    def decrypt(self, data: Data, key: Key): Data:
+    def decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
         pass
 
