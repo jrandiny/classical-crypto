@@ -13,7 +13,7 @@ class VigenereEngine(BaseEngine):
             support_file=False, support_text=False, key_type=KeyType.STRING, key_length=1
         )
 
-    def encrypt(self, data: Data) -> Data:
+    def encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
         pass
 

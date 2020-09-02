@@ -14,7 +14,7 @@ class EngineCapabilities:
 
 class BaseEngine(ABC):
     @abstractmethod
-    def encrypt(self, data: Data) -> Data:
+    def encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
         pass
 
