@@ -28,12 +28,22 @@ class BaseEngine(ABC):
         if len(key.data) != self.capabilities.key_length:
             raise Exception('Invalid key length')
 
-    @abstractmethod
     def encrypt(self, data: Data, key: Key) -> Data:
+        self._check_data_supported(data)
+        self._check_key_format(key)
+        return self._do_encrypt(data, key)
+
+    def decrypt(self, data: Data, key: Key) -> Data:
+        self._check_data_supported(data)
+        self._check_key_format(key)
+        return self._do_decrypt(data, key)
+
+    @abstractmethod
+    def _do_encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
         pass
 
     @abstractmethod
-    def decrypt(self, data: Data, key: Key) -> Data:
+    def _do_decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
         pass
