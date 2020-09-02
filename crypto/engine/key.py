@@ -14,4 +14,4 @@ class Key:
         if key_type == KeyType.NUMBER:
             self.data = list(map(int, data))
         elif key_type == KeyType.STRING:
-            self.data = list(map(str, data))
+            self.data = list(map(lambda x: x.lower(), map(str, data)))

@@ -10,7 +10,10 @@ class DataType(Enum):
 class Data:
     def __init__(self, data_type: DataType, data: str):
         self.data_type = data_type
-        self._data = data
+        if self.data_type == DataType.TEXT:
+            self._data = data.lower()
+        else:
+            self._data = data
 
     def get_text(self) -> str:
         assert self.data_type == DataType.TEXT
