@@ -1,5 +1,19 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtCore import QSize
+
+from crypto.gui.components.algorithm_list import AlgorithmList
+from crypto.gui.components.main_input import MainInput
+from crypto.gui.components.configuration import Configuration
+
+from crypto.gui.components.main_input.tab_file import TabFile
+from crypto.gui.components.main_input.tab_string import TabString
+
+list_of_algorithm = [
+    'Playfair Cipher', 'Auto-key Vigenere Cipher', 'Full Vigenere Cipher',
+    'Vigenere Cipher Standard ', 'Affine Cipher', 'Hill Cipher',
+    'Extended Vigenere Cipher', 'Super Encryption', 'Enigma Cipher'
+]
 
 
 class MainWindow(QMainWindow):
@@ -9,179 +23,23 @@ class MainWindow(QMainWindow):
 
     def setupUi(self):
         self.setObjectName("MainWindow")
-        self.resize(869, 565)
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
-        self.groupBox = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox.setGeometry(QtCore.QRect(10, 20, 241, 521))
-        self.groupBox.setObjectName("groupBox")
-        self.radioButton_4 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_4.setGeometry(QtCore.QRect(20, 250, 201, 23))
-        self.radioButton_4.setObjectName("radioButton_4")
-        self.radioButton_3 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_3.setGeometry(QtCore.QRect(20, 150, 201, 23))
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.radioButton_2 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_2.setGeometry(QtCore.QRect(20, 100, 171, 23))
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.radioButton = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton.setGeometry(QtCore.QRect(20, 50, 201, 23))
-        self.radioButton.setObjectName("radioButton")
-        self.radioButton_5 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_5.setGeometry(QtCore.QRect(20, 300, 201, 23))
-        self.radioButton_5.setObjectName("radioButton_5")
-        self.radioButton_6 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_6.setGeometry(QtCore.QRect(20, 350, 201, 23))
-        self.radioButton_6.setObjectName("radioButton_6")
-        self.radioButton_7 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_7.setGeometry(QtCore.QRect(20, 200, 201, 23))
-        self.radioButton_7.setObjectName("radioButton_7")
-        self.radioButton_8 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_8.setGeometry(QtCore.QRect(20, 400, 201, 23))
-        self.radioButton_8.setObjectName("radioButton_8")
-        self.radioButton_9 = QtWidgets.QRadioButton(self.groupBox)
-        self.radioButton_9.setGeometry(QtCore.QRect(20, 450, 201, 23))
-        self.radioButton_9.setObjectName("radioButton_9")
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setGeometry(QtCore.QRect(270, 10, 361, 531))
-        self.tabWidget.setObjectName("tabWidget")
-        self.tab = QtWidgets.QWidget()
-        self.tab.setObjectName("tab")
-        self.textEdit = QtWidgets.QTextEdit(self.tab)
-        self.textEdit.setGeometry(QtCore.QRect(10, 20, 341, 151))
-        self.textEdit.setObjectName("textEdit")
-        self.pushButton_3 = QtWidgets.QPushButton(self.tab)
-        self.pushButton_3.setGeometry(QtCore.QRect(210, 180, 131, 25))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.pushButton = QtWidgets.QPushButton(self.tab)
-        self.pushButton.setGeometry(QtCore.QRect(230, 250, 89, 25))
-        self.pushButton.setObjectName("pushButton")
-        self.label_2 = QtWidgets.QLabel(self.tab)
-        self.label_2.setGeometry(QtCore.QRect(150, 250, 67, 17))
-        self.label_2.setObjectName("label_2")
-        self.pushButton_2 = QtWidgets.QPushButton(self.tab)
-        self.pushButton_2.setGeometry(QtCore.QRect(220, 460, 131, 25))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.label = QtWidgets.QLabel(self.tab)
-        self.label.setGeometry(QtCore.QRect(20, 250, 67, 17))
-        self.label.setObjectName("label")
-        self.horizontalSlider = QtWidgets.QSlider(self.tab)
-        self.horizontalSlider.setGeometry(QtCore.QRect(90, 250, 51, 21))
-        self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
-        self.horizontalSlider.setObjectName("horizontalSlider")
-        self.textEdit_2 = QtWidgets.QTextEdit(self.tab)
-        self.textEdit_2.setGeometry(QtCore.QRect(10, 310, 341, 141))
-        self.textEdit_2.setObjectName("textEdit_2")
-        self.tabWidget.addTab(self.tab, "")
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-        self.label_3 = QtWidgets.QLabel(self.tab_2)
-        self.label_3.setGeometry(QtCore.QRect(210, 220, 67, 17))
-        self.label_3.setObjectName("label_3")
-        self.label_4 = QtWidgets.QLabel(self.tab_2)
-        self.label_4.setGeometry(QtCore.QRect(80, 220, 67, 17))
-        self.label_4.setObjectName("label_4")
-        self.horizontalSlider_2 = QtWidgets.QSlider(self.tab_2)
-        self.horizontalSlider_2.setGeometry(QtCore.QRect(150, 220, 51, 21))
-        self.horizontalSlider_2.setOrientation(QtCore.Qt.Horizontal)
-        self.horizontalSlider_2.setObjectName("horizontalSlider_2")
-        self.textEdit_3 = QtWidgets.QTextEdit(self.tab_2)
-        self.textEdit_3.setGeometry(QtCore.QRect(10, 40, 231, 41))
-        self.textEdit_3.setObjectName("textEdit_3")
-        self.textEdit_4 = QtWidgets.QTextEdit(self.tab_2)
-        self.textEdit_4.setGeometry(QtCore.QRect(10, 120, 231, 41))
-        self.textEdit_4.setObjectName("textEdit_4")
-        self.pushButton_4 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_4.setGeometry(QtCore.QRect(250, 50, 89, 25))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_5 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_5.setGeometry(QtCore.QRect(250, 130, 89, 25))
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.pushButton_6 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_6.setGeometry(QtCore.QRect(130, 270, 89, 25))
-        self.pushButton_6.setObjectName("pushButton_6")
-        self.tabWidget.addTab(self.tab_2, "")
-        self.groupBox_2 = QtWidgets.QGroupBox(self.centralwidget)
-        self.groupBox_2.setGeometry(QtCore.QRect(640, 20, 221, 521))
-        self.groupBox_2.setObjectName("groupBox_2")
-        self.checkBox = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox.setGeometry(QtCore.QRect(10, 280, 161, 23))
-        self.checkBox.setObjectName("checkBox")
-        self.checkBox_2 = QtWidgets.QCheckBox(self.groupBox_2)
-        self.checkBox_2.setGeometry(QtCore.QRect(10, 310, 161, 23))
-        self.checkBox_2.setObjectName("checkBox_2")
-        self.label_5 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_5.setGeometry(QtCore.QRect(10, 250, 67, 17))
-        self.label_5.setObjectName("label_5")
-        self.label_6 = QtWidgets.QLabel(self.groupBox_2)
-        self.label_6.setGeometry(QtCore.QRect(10, 30, 67, 17))
-        self.label_6.setObjectName("label_6")
-        self.textEdit_5 = QtWidgets.QTextEdit(self.groupBox_2)
-        self.textEdit_5.setGeometry(QtCore.QRect(10, 50, 201, 31))
-        self.textEdit_5.setObjectName("textEdit_5")
-        self.setCentralWidget(self.centralwidget)
+        self.resize(869, 600)
+        self.central_widget = QtWidgets.QWidget(self)
+        self.central_widget.setObjectName("central_widget")
+
+        self.algorithm_list = AlgorithmList('Algorithm', list_of_algorithm,
+                                            QSize(241, 512),
+                                            self.central_widget)
+        self.algorithm_list.move(10, 20)
+
+        self.main_input = MainInput(QSize(361, 531), self.central_widget)
+        self.main_input.move(270, 10)
+
+        self.configuration = Configuration('Configuration', QSize(221, 521),
+                                           self.central_widget)
+        self.configuration.move(640, 20)
+
+        self.setCentralWidget(self.central_widget)
         self.statusbar = QtWidgets.QStatusBar(self)
         self.statusbar.setObjectName("statusbar")
         self.setStatusBar(self.statusbar)
-
-        self.retranslateUi()
-        self.tabWidget.setCurrentIndex(0)
-        QtCore.QMetaObject.connectSlotsByName(self)
-
-    def retranslateUi(self):
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.groupBox.setTitle(_translate("MainWindow", "Algorithm"))
-        self.radioButton_4.setText(_translate("MainWindow", "Playfair Cipher"))
-        self.radioButton_3.setText(
-            _translate("MainWindow", "Auto-key Vigenere Cipher"))
-        self.radioButton_2.setText(
-            _translate("MainWindow", "Full Vigenere Cipher"))
-        self.radioButton.setText(
-            _translate("MainWindow", "Vigenere Cipher Standard "))
-        self.radioButton_5.setText(_translate("MainWindow", "Affine Cipher"))
-        self.radioButton_6.setText(_translate("MainWindow", "Hill Cipher"))
-        self.radioButton_7.setText(
-            _translate("MainWindow", "Extended Vigenere Cipher"))
-        self.radioButton_8.setText(_translate("MainWindow",
-                                              "Super Encryption"))
-        self.radioButton_9.setText(_translate("MainWindow", "Enigma Cipher"))
-        self.pushButton_3.setText(_translate("MainWindow",
-                                             "Copy to Clipboard"))
-        self.pushButton.setText(_translate("MainWindow", "Execute"))
-        self.label_2.setText(_translate("MainWindow", "Decrypt"))
-        self.pushButton_2.setText(_translate("MainWindow",
-                                             "Copy to Clipboard"))
-        self.label.setText(_translate("MainWindow", "Encrypt"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab),
-                                  _translate("MainWindow", "Tab 1"))
-        self.label_3.setText(_translate("MainWindow", "Decrypt"))
-        self.label_4.setText(_translate("MainWindow", "Encrypt"))
-        self.textEdit_3.setHtml(
-            _translate(
-                "MainWindow",
-                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                "p, li { white-space: pre-wrap; }\n"
-                "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-                "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Input file path</p></body></html>"
-            ))
-        self.textEdit_4.setHtml(
-            _translate(
-                "MainWindow",
-                "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-                "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-                "p, li { white-space: pre-wrap; }\n"
-                "</style></head><body style=\" font-family:\'Ubuntu\'; font-size:11pt; font-weight:400; font-style:normal;\">\n"
-                "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">Output file path</p></body></html>"
-            ))
-        self.pushButton_4.setText(_translate("MainWindow", "Import"))
-        self.pushButton_5.setText(_translate("MainWindow", "Browse"))
-        self.pushButton_6.setText(_translate("MainWindow", "Execute"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2),
-                                  _translate("MainWindow", "Tab 2"))
-        self.groupBox_2.setTitle(_translate("MainWindow", "Configuration"))
-        self.checkBox.setText(_translate("MainWindow", "Remove whitespace"))
-        self.checkBox_2.setText(_translate("MainWindow", "Group in 5"))
-        self.label_5.setText(_translate("MainWindow", "Output"))
-        self.label_6.setText(_translate("MainWindow", "Key"))
