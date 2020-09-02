@@ -1,12 +1,14 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from engine.data import Data
-
+from engine.key import KeyType, Key
 
 @dataclass
 class EngineCapabilities:
     support_file: bool
     support_text: bool
+    key_type: KeyType
+    key_length: int
 
 
 class BaseEngine(ABC):
@@ -16,7 +18,7 @@ class BaseEngine(ABC):
         pass
 
     @abstractmethod
-    def decrypt(self, data: Data, key): Data:
+    def decrypt(self, data: Data, key: Key): Data:
         """Decrypt data"""
         pass
 
