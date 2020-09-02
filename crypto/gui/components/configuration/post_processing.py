@@ -10,10 +10,8 @@ class PostProcessing(QWidget):
         self.lbl_title = QLabel()
         self.lbl_title.setText('Output')
 
-        self.btn_remove_whitespace = QCheckBox()
-        self.btn_remove_whitespace.setText('Remove whitespace')
-        self.btn_group = QCheckBox()
-        self.btn_group.setText('Group in 5 Characters')
+        self.btn_remove_whitespace = QCheckBox('Remove whitespace')
+        self.btn_group = QCheckBox('Group in 5 Characters')
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.lbl_title)
