@@ -1,5 +1,5 @@
 from crypto.engine.base_engine import BaseEngine, EngineCapabilities
-from crypto.engine.data import Data
+from crypto.engine.data import *
 from crypto.engine.key import *
 from crypto.util.string_util import StringUtil
 
@@ -29,7 +29,7 @@ class VigenereEngine(BaseEngine):
 
         encrypted_array += ord('a')
 
-        return ''.join(map(chr, encrypted_array))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, encrypted_array)))
 
     def _do_decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
@@ -43,7 +43,7 @@ class VigenereEngine(BaseEngine):
 
         encrypted_array += ord('a')
 
-        return ''.join(map(chr, encrypted_array))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, encrypted_array)))
 
     def _transform_key(self, key: Key, string_array):
         key_array = np.frombuffer(key.data[0].lower().encode(), np.int8) - ord('a')

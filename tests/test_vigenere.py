@@ -54,10 +54,10 @@ def test_encrypt_decrypt():
 
     result = engine.encrypt(test_data, test_key)
 
-    assert result == expected_result
+    assert result.data_type == DataType.TEXT
+    assert result.get_text() == expected_result
 
-    encrypted_data = Data(DataType.TEXT, result)
+    decrypted_result = engine.decrypt(result, test_key)
 
-    decrypted_result = engine.decrypt(encrypted_data, test_key)
-
-    assert decrypted_result == 'exampletext'
+    assert decrypted_result.data_type == DataType.TEXT
+    assert decrypted_result.get_text() == 'exampletext'
