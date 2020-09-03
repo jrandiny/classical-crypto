@@ -40,13 +40,13 @@ class VigenereEngine(BaseEngine):
 
         full_key_array = self._transform_key(key, string_array)
 
-        encrypted_array = string_array - full_key_array
+        decrypted_array = string_array - full_key_array
 
-        encrypted_array = np.mod(encrypted_array, 26)
+        decrypted_array = np.mod(decrypted_array, 26)
 
-        encrypted_array += ord('a')
+        decrypted_array += ord('a')
 
-        return Data(data_type=DataType.TEXT, data=''.join(map(chr, encrypted_array)))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, decrypted_array)))
 
     def _transform_key(self, key: Key, string_array):
         key_array = np.frombuffer(key.data[0].lower().encode(), np.int8) - ord('a')
