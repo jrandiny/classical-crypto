@@ -5,3 +5,8 @@ Simple GUI application to encrypt and decrypt random binary file or string using
 ```
 python main.py
 ```
+
+## Test
+```
+python -m pytest tests/
+```
