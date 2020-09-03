@@ -21,22 +21,38 @@ class PlayfairEngine(BaseEngine):
         """Encrypt data"""
         string_array = self._transform_text(data)
 
-        full_key_array = self._transform_key(key, string_array)
+        full_key_array = self._transform_key(key)
 
-        encrypted_array = string_array + full_key_array
+        encrypted_text = ''
 
-        encrypted_array = np.mod(encrypted_array, 26)
+        for bigram in string_array:
+            cipher = ''
+            first_pos = list(
+                map(lambda x: x[0], np.where(full_key_array == bigram[0])))
+            second_pos = list(
+                map(lambda x: x[0], np.where(full_key_array == bigram[1])))
 
-        encrypted_array += ord('a')
+            if first_pos[0] == second_pos[0]:
+                cipher = full_key_array[first_pos[0]][(first_pos[1] + 1) % 5]
+                cipher += full_key_array[second_pos[0]][(second_pos[1] + 1) %
+                                                        5]
+            elif first_pos[1] == second_pos[1]:
+                cipher = full_key_array[(first_pos[0] + 1) % 5][first_pos[1]]
+                cipher += full_key_array[(second_pos[0] + 1) %
+                                         5][second_pos[1]]
+            else:
+                cipher = full_key_array[first_pos[0]][second_pos[1]]
+                cipher += full_key_array[second_pos[0]][first_pos[1]]
 
-        return Data(data_type=DataType.TEXT,
-                    data=''.join(map(chr, encrypted_array)))
+            encrypted_text += cipher
+
+        return Data(data_type=DataType.TEXT, data=encrypted_text)
 
     def _do_decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
         string_array = self._transform_text(data)
 
-        full_key_array = self._transform_key(key, string_array)
+        full_key_array = self._transform_key(string_array)
 
         encrypted_array = string_array - full_key_array
 
@@ -95,7 +111,9 @@ class PlayfairEngine(BaseEngine):
 if __name__ == "__main__":
     engine = PlayfairEngine()
     test_key = Key(KeyType.STRING, ['JALAN GANESHA SEPULUH'])
-    test_data = Data(DataType.TEXT, 'aaaaaaaaaaaabaaaaa')
+    test_data = Data(DataType.TEXT, 'temui ibu nanti malam')
 
     print(engine._transform_key(test_key))
     print(engine._transform_text(test_data))
+    result = engine._do_encrypt(test_data, test_key)
+    print(result.get_text())
