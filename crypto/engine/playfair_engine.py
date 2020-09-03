@@ -20,9 +20,7 @@ class PlayfairEngine(BaseEngine):
     def _do_encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
         string_array = self._transform_text(data)
-
         full_key_array = self._transform_key(key)
-
         encrypted_text = ''
 
         for bigram in string_array:
@@ -50,18 +48,30 @@ class PlayfairEngine(BaseEngine):
 
     def _do_decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
-        string_array = self._transform_text(data)
+        string_array = self._transform_cipher(data)
+        full_key_array = self._transform_key(key)
+        plain_text = ''
 
-        full_key_array = self._transform_key(string_array)
+        for bigram in string_array:
+            plain = ''
+            first_pos = list(
+                map(lambda x: x[0], np.where(full_key_array == bigram[0])))
+            second_pos = list(
+                map(lambda x: x[0], np.where(full_key_array == bigram[1])))
 
-        encrypted_array = string_array - full_key_array
+            if first_pos[0] == second_pos[0]:
+                plain = full_key_array[first_pos[0]][(first_pos[1] - 1) % 5]
+                plain += full_key_array[second_pos[0]][(second_pos[1] - 1) % 5]
+            elif first_pos[1] == second_pos[1]:
+                plain = full_key_array[(first_pos[0] - 1) % 5][first_pos[1]]
+                plain += full_key_array[(second_pos[0] - 1) % 5][second_pos[1]]
+            else:
+                plain = full_key_array[first_pos[0]][second_pos[1]]
+                plain += full_key_array[second_pos[0]][first_pos[1]]
 
-        encrypted_array = np.mod(encrypted_array, 26)
+            plain_text += plain
 
-        encrypted_array += ord('a')
-
-        return Data(data_type=DataType.TEXT,
-                    data=''.join(map(chr, encrypted_array)))
+        return Data(data_type=DataType.TEXT, data=plain_text)
 
     def _transform_key(self, key: Key):
         original_key = StringUtil.get_unique_char(key.data[0].lower())
@@ -73,6 +83,10 @@ class PlayfairEngine(BaseEngine):
         key_array = np.array(list(padded_key))
 
         return np.reshape(key_array, (5, 5))
+
+    def _transform_cipher(self, data: Data):
+        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
+        return np.array(StringUtil.split_to_group(raw_text, 2).split(' '))
 
     def _transform_text(self, data: Data):
         raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
@@ -116,4 +130,6 @@ if __name__ == "__main__":
     print(engine._transform_key(test_key))
     print(engine._transform_text(test_data))
     result = engine._do_encrypt(test_data, test_key)
+    print(result.get_text())
+    result = engine._do_decrypt(result, test_key)
     print(result.get_text())
