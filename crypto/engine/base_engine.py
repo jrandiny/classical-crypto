@@ -33,7 +33,8 @@ class BaseEngine(ABC):
         if key.key_type != self.capabilities.key_type:
             raise Exception('Invalid key type')
         if len(key.data) != self.capabilities.key_length:
-            raise Exception('Invalid key length')
+            if self.capabilities.key_length != -1:  # bypass key length
+                raise Exception('Invalid key length')
 
     def encrypt(self, data: Data, key: Key) -> Data:
         self._check_data_supported(data)
