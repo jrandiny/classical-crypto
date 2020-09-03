@@ -1,6 +1,7 @@
 from crypto.engine.base_engine import BaseEngine, EngineCapabilities
 from crypto.engine.data import *
 from crypto.engine.key import *
+from crypto.engine.vigenere_engine import VigenereEngine
 from crypto.util.string_util import StringUtil
 
 import numpy as np
@@ -8,7 +9,7 @@ import random
 import string
 
 
-class FullVigenereEngine(BaseEngine):
+class FullVigenereEngine(VigenereEngine):
     def __init__(self):
         super().__init__(
             EngineCapabilities(
@@ -59,13 +60,3 @@ class FullVigenereEngine(BaseEngine):
             output_str.append(chr(alphabet_index + ord('a')))
 
         return Data(data_type=DataType.TEXT, data=''.join(output_str))
-
-    def _transform_key(self, key: Key, string_array):
-        key_array = np.frombuffer(key.data[0].lower().encode(), np.int8) - ord('a')
-        resized_key_array = np.resize(key_array, len(string_array))
-        return resized_key_array.astype(np.int32)
-
-    def _transform_text(self, data: Data):
-        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
-        text_array = np.frombuffer(raw_text.encode(), np.int8) - ord('a')
-        return text_array.astype(np.int32)
