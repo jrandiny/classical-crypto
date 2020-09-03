@@ -7,7 +7,7 @@ import string
 class StringUtil:
     @staticmethod
     def strip_non_ascii(input: str) -> str:
-        return re.sub('[^\x00-\x7f]', '', input)
+        return re.sub('[^\x00-\xff]', '', input)
 
     @staticmethod
     def strip_non_alphabet(input: str) -> str:

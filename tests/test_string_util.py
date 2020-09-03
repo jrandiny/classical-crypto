@@ -26,7 +26,7 @@ def test_generate_random_string():
 
 
 def test_strip_non_ascii():
-    assert StringUtil.strip_non_ascii('abc网络😂d') == 'abcd'
+    assert StringUtil.strip_non_ascii('abc网络😂d\x85') == 'abcd\x85'
 
 
 def test_get_unique_char():
