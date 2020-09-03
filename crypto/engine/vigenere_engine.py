@@ -14,6 +14,9 @@ class VigenereEngine(BaseEngine):
             )
         )
 
+    def generate_random_key(self) -> Key:
+        return Key(KeyType.STRING, [StringUtil.generate_random_string(8)])
+
     def _do_encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
         string_array = self._transform_text(data)

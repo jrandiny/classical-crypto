@@ -16,6 +16,10 @@ class BaseEngine(ABC):
     def __init__(self, engine_capabilities: EngineCapabilities):
         self.capabilities = engine_capabilities
 
+    @abstractmethod
+    def generate_random_key(self) -> Key:
+        pass
+
     def complete_key(self, data: Data, key: Key) -> Key:
         return key
 

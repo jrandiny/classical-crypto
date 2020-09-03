@@ -21,7 +21,7 @@ def test_invalid_key():
     test_data = Data(DataType.TEXT, 'Example text')
     completed_key = engine.complete_key(test_data, test_key)
 
-    with pytest.raises:
+    with pytest.raises(Exception):
         engine.encrypt(test_data, test_key)
 
 

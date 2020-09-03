@@ -35,6 +35,15 @@ def test_capabilities_guard():
     engine.encrypt(valid_data, valid_key)
 
 
+def test_generate_key():
+    engine = VigenereEngine()
+    generated_key = engine.generate_random_key()
+
+    assert generated_key.key_type == KeyType.STRING
+    assert len(generated_key.data) == 1
+    assert type(generated_key.data[0]) == str
+
+
 def test_encrypt_decrypt():
     engine = VigenereEngine()
 
