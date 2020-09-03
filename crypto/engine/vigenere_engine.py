@@ -18,7 +18,7 @@ class VigenereEngine(BaseEngine):
         """Encrypt data"""
         string_array = self._transform_text(data)
 
-        full_key_array = self._transform_key(key, len(string_array))
+        full_key_array = self._transform_key(key, string_array)
 
         encrypted_array = string_array + full_key_array
 
@@ -32,7 +32,7 @@ class VigenereEngine(BaseEngine):
         """Decrypt data"""
         string_array = self._transform_text(data)
 
-        full_key_array = self._transform_key(key, len(string_array))
+        full_key_array = self._transform_key(key, string_array)
 
         encrypted_array = string_array - full_key_array
 
@@ -42,9 +42,9 @@ class VigenereEngine(BaseEngine):
 
         return ''.join(map(chr, encrypted_array))
 
-    def _transform_key(self, key: Key, length: int):
+    def _transform_key(self, key: Key, string_array):
         key_array = np.frombuffer(key.data[0].lower().encode(), np.int8) - ord('a')
-        return np.resize(key_array, length)
+        return np.resize(key_array, len(string_array))
 
     def _transform_text(self, data: Data):
         raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
