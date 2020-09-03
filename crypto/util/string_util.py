@@ -6,6 +6,10 @@ import string
 
 class StringUtil:
     @staticmethod
+    def strip_non_ascii(input: str) -> str:
+        return re.sub('[^\x00-\x7f]', '', input)
+
+    @staticmethod
     def strip_non_alphabet(input: str) -> str:
         return re.sub('[^a-zA-Z]+', '', input)
 
@@ -24,17 +28,13 @@ class StringUtil:
 
     @staticmethod
     def generate_random_string(length: int) -> str:
-        return ''.join(
-            random.choice(string.ascii_lowercase) for _ in range(length))
+        return ''.join(random.choice(string.ascii_lowercase) for _ in range(length))
 
     @staticmethod
     def get_unique_char(input: str) -> str:
         unique_char = set()
         add_char = unique_char.add
-        return ''.join([
-            char for char in input
-            if not (char in unique_char or add_char(char))
-        ])
+        return ''.join([char for char in input if not (char in unique_char or add_char(char))])
 
     @staticmethod
     def pad_alphabet(input: str) -> str:
