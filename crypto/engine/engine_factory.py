@@ -3,6 +3,8 @@ from crypto.engine.autokey_vigenere_engine import AutokeyVigenereEngine
 from crypto.engine.full_vigenere_cipher import FullVigenereEngine
 from crypto.engine.vigenere_engine import VigenereEngine
 from crypto.engine.playfair_engine import PlayfairEngine
+from crypto.engine.hill_engine import HillEngine
+from crypto.engine.affine_engine import AffineEngine
 from enum import Enum
 
 
@@ -10,7 +12,9 @@ class EngineType(Enum):
     VIGENERE = 'vigenere'
     VIGENERE_AUTOKEY = 'vigenere_autokey'
     VIGENERE_FULL = 'vigenere_full'
-    PLAYFAIR = 'playfair'
+    PLAYFAIR = 'playfair',
+    HILL = 'hill',
+    AFFINE = 'affine',
 
     @staticmethod
     def list():
@@ -28,5 +32,9 @@ class EngineFactory():
             return FullVigenereEngine()
         elif engine_type == EngineType.PLAYFAIR:
             return PlayfairEngine()
+        elif engine_type == EngineType.HILL:
+            return HillEngine()
+        elif engine_type == EngineType.AFFINE:
+            return AffineEngine()
         else:
             raise Exception('Unsupported engine')
