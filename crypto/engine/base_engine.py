@@ -16,6 +16,9 @@ class BaseEngine(ABC):
     def __init__(self, engine_capabilities: EngineCapabilities):
         self.capabilities = engine_capabilities
 
+    def complete_key(self, data: Data, key: Key) -> Key:
+        return key
+
     def _check_data_supported(self, data: Data):
         if data.data_type == DataType.FILE and not self.capabilities.support_file:
             raise Exception('Engine doesn\'t support file input')
