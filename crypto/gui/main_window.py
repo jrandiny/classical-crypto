@@ -4,7 +4,7 @@ from PyQt5.QtCore import QSize
 
 from crypto.gui.components.algorithm_list import AlgorithmList
 from crypto.gui.components.main_input import MainInput
-from crypto.gui.components.configuration import Configuration
+from crypto.gui.components.configuration_box import ConfigurationBox
 
 list_of_algorithm = [
     'Playfair Cipher', 'Auto-key Vigenere Cipher', 'Full Vigenere Cipher',
@@ -32,12 +32,13 @@ class MainWindow(QMainWindow):
 
         self.main_input = MainInput(QSize(361, 531), self.central_widget)
 
-        self.configuration = Configuration('Configuration', QSize(221, 521),
-                                           self.central_widget)
+        self.configuration_box = ConfigurationBox('Configuration',
+                                                  QSize(221, 521),
+                                                  self.central_widget)
 
         self.layout.addWidget(self.algorithm_list)
         self.layout.addWidget(self.main_input)
-        self.layout.addWidget(self.configuration)
+        self.layout.addWidget(self.configuration_box)
 
         self.central_widget.setLayout(self.layout)
 

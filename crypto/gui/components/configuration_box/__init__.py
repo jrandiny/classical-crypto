@@ -1,13 +1,13 @@
 from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QButtonGroup, QRadioButton, QSizePolicy
 from PyQt5.QtCore import QSize
 
-from crypto.gui.components.configuration.encryption_key import EncryptionKey
-from crypto.gui.components.configuration.post_processing import PostProcessing
+from crypto.gui.components.configuration_box.encryption_key import EncryptionKey
+from crypto.gui.components.configuration_box.post_processing import PostProcessing
 
 
-class Configuration(QGroupBox):
+class ConfigurationBox(QGroupBox):
     def __init__(self, title: str, size: QSize, parent: QWidget = None):
-        super(Configuration, self).__init__(parent=parent)
+        super(ConfigurationBox, self).__init__(parent=parent)
 
         self.size = size
         self.title = title
