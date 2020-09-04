@@ -14,10 +14,9 @@ class MainWindow(QMainWindow):
         self.setupUi()
 
     def setupUi(self):
-        self.setObjectName("MainWindow")
-        self.resize(869, 600)
+        self.setWindowTitle('Classical Cryptography')
+        self.setMinimumSize(870, 600)
         self.central_widget = QtWidgets.QWidget(self)
-        self.central_widget.setObjectName("central_widget")
 
         self.layout = QHBoxLayout()
         self.algorithm_list = AlgorithmList('Algorithm', EngineType.list(),
@@ -32,8 +31,4 @@ class MainWindow(QMainWindow):
         self.layout.addWidget(self.configuration_box)
 
         self.central_widget.setLayout(self.layout)
-
         self.setCentralWidget(self.central_widget)
-        self.statusbar = QtWidgets.QStatusBar(self)
-        self.statusbar.setObjectName("statusbar")
-        self.setStatusBar(self.statusbar)
