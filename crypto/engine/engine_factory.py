@@ -17,7 +17,7 @@ class EngineType(Enum):
     AFFINE = 'Affine Cipher'
     VIGENERE_EXTENDED = 'Extended Vigenere Cipher'
     SUPER_ENCRYPTION = 'Super Encryption'
-    ENIGMA = 'Enigma Cipher'
+    ENIGMA = 'Enigma Cipher (M3)'
 
     @staticmethod
     def list():
