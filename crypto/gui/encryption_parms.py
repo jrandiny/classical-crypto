@@ -32,19 +32,11 @@ class EncryptionParms:
             self.mode = None
             self.engine_type = None
             self.output_conf = None
-            self.raw_input = None
-            self.raw_key = None
-            self.file_in_path = None
-            self.file_out_path = None
 
     def print_info(self):
         print('***Encryption Parameters***')
         print('Mode:', self.mode)
         print('Engine Type:', self.engine_type)
-        print('Raw Input:', self.raw_input)
-        print('Raw Key:', self.raw_key)
-        print('Input File Path:', self.file_in_path)
-        print('Output File Path:', self.file_out_path)
         print('Output Configuration:', self.output_conf)
         print('***************************')
 
