@@ -1,9 +1,21 @@
+from crypto.engine.engine_factory import *
+from crypto.engine.data import *
+from crypto.engine.key import *
 from enum import Enum
 
 
 class ModeType(Enum):
     ENCRYPT = 'Encrypt'
     DECRYPT = 'Decrypt'
+
+
+class OutputType(Enum):
+    NO_SPACE = 'Remove whitespace'
+    GROUP = 'Group in 5'
+
+    @staticmethod
+    def list():
+        return list(map(lambda out_type: out_type, OutputType))
 
 
 class EncryptionParameter:
@@ -15,6 +27,10 @@ class EncryptionParameter:
         else:
             EncryptionParameter.__instance = self
             self.method = ModeType.ENCRYPT
+            self.engine_type = None
+            self.key = None
+            self.data = None
+            self.output_configuration = OutputType.NO_SPACE
 
     def is_parameter_valid(self):
         return True
