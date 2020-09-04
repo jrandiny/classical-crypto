@@ -4,9 +4,9 @@ from crypto.gui.encryption_parms import EncryptionParms
 from crypto.engine.key import Key, KeyType
 
 
-class EncryptionKey(QGroupBox):
+class EncryptionBox(QGroupBox):
     def __init__(self, parent: QWidget = None):
-        super(EncryptionKey, self).__init__(parent=parent)
+        super(EncryptionBox, self).__init__(parent=parent)
         self.setup_ui()
 
     def setup_ui(self):

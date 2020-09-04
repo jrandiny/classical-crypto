@@ -52,7 +52,7 @@ class MainWindow(QMainWindow):
 
     def execute_string(self):
         mode = self.enc_parms.mode
-        key = self.configuration_box.encryption_key.get_key()
+        key = self.configuration_box.encryption_box.get_key()
         data = self.main_input.tab_string.input_string.get_data()
         engine = self.enc_parms.get_engine()
 
