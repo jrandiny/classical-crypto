@@ -52,7 +52,7 @@ class VigenereEngine(BaseEngine):
         return Data(data_type=DataType.TEXT, data=''.join(map(chr, decrypted_array)))
 
     def _transform_key(self, key: Key, string_array) -> NDArray[np.int32]:
-        key_array = np.frombuffer(key.data[0].lower().encode(), np.int8) - ord('a')
+        key_array = np.frombuffer(key.data[0].encode(), np.int8) - ord('a')
         return np.resize(key_array, len(string_array)).astype(np.int32)
 
     def _transform_text(self, data: Data) -> NDArray[np.int32]:
