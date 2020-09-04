@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel
 
 from crypto.gui.components.main_input.input_file import InputFile
+from crypto.gui.components.main_input.input_mode import InputMode
 
 
 class TabFile(QWidget):
@@ -9,23 +10,13 @@ class TabFile(QWidget):
         self.setupUi()
 
     def setupUi(self):
-        self.input = InputFile('Import')
-        self.output = InputFile('Browse')
+        self.input_file = InputFile('Import')
+        self.output_file = InputFile('Browse')
+        self.input_mode = InputMode()
 
-        self.btn_switch = QPushButton('Switch Mode')
-        self.btn_execute = QPushButton('Execute')
-        self.lbl_mode_title = QLabel('Mode:')
-        self.lbl_mode_value = QLabel('Encrypt')
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.input_file)
+        self.layout.addWidget(self.output_file)
+        self.layout.addWidget(self.input_mode)
 
-        self.h_layout = QHBoxLayout()
-        self.h_layout.addWidget(self.lbl_mode_title)
-        self.h_layout.addWidget(self.lbl_mode_value)
-
-        self.v_layout = QVBoxLayout()
-        self.v_layout.addWidget(self.input)
-        self.v_layout.addWidget(self.output)
-        self.v_layout.addLayout(self.h_layout)
-        self.v_layout.addWidget(self.btn_switch)
-        self.v_layout.addWidget(self.btn_execute)
-
-        self.setLayout(self.v_layout)
+        self.setLayout(self.layout)
