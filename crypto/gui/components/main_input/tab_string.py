@@ -3,7 +3,7 @@ from PyQt5.QtCore import Qt
 
 from crypto.gui.components.main_input.input_string import InputString
 from crypto.gui.components.main_input.input_mode import InputMode
-from crypto.gui.encryption_parameter import EncryptionParms
+from crypto.gui.encryption_parms import EncryptionParms
 
 
 class TabString(QWidget):

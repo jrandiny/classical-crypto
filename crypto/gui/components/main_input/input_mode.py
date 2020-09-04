@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
 from PyQt5.QtCore import Qt
 
-from crypto.gui.encryption_parameter import ModeType, EncryptionParms
+from crypto.gui.encryption_parms import ModeType, EncryptionParms
 
 
 class InputMode(QWidget):

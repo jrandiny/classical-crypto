@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLab
 
 from crypto.gui.components.main_input.input_file import InputFile
 from crypto.gui.components.main_input.input_mode import InputMode
-from crypto.gui.encryption_parameter import EncryptionParms
+from crypto.gui.encryption_parms import EncryptionParms
 
 
 class TabFile(QWidget):

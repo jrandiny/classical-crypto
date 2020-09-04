@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout, QRadioButton, QButtonGroup, QSizePolicy, QSpacerItem, QGroupBox
 
-from crypto.gui.encryption_parameter import OutputType, EncryptionParms
+from crypto.gui.encryption_parms import OutputType, EncryptionParms
 
 
 class PostProcessing(QGroupBox):

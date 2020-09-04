@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QButtonGroup, QRadi
 from PyQt5.QtCore import QSize
 
 from crypto.engine.engine_factory import EngineType
-from crypto.gui.encryption_parameter import EncryptionParms
+from crypto.gui.encryption_parms import EncryptionParms
 
 
 class AlgorithmList(QGroupBox):
