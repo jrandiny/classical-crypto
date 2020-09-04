@@ -52,7 +52,17 @@ class EnigmaRotor():
 
 class EnigmaEngine(BaseEngine):
     def __init__(self, *args):
-        self._standard_rotor = []
+        self._standard_rotor = [
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'EKMFLGDQVZNTOWYHXUSPAIBRCJ', ['Q']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'AJDKSIRUXBLHWTMCQGZNPYFVOE', ['E']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'BDFHJLCPRTXVZNYEIWGAKMUSQO', ['V']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'ESOVPZJAYQUIRHXLNFTGKDCMWB', ['J']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'VZBRGITYUPSDNHLXAWMJQOFECK', ['Z']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'JPGVOUMFYQBENHZRDKASXLICTW', ['Z', 'M']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'NZJHGRCXMYSWBOUFAIVLPEKQDT', ['Z', 'M']],
+            ['ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'FKQHTLXOCBJSPDZRAMEWNIUYGV', ['Z', 'M']]
+        ]
+
         if len(args) == 0:
             super().__init__(
                 EngineCapabilities(
