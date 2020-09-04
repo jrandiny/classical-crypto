@@ -9,12 +9,15 @@ from enum import Enum
 
 
 class EngineType(Enum):
-    VIGENERE = 'vigenere'
-    VIGENERE_AUTOKEY = 'vigenere_autokey'
-    VIGENERE_FULL = 'vigenere_full'
-    PLAYFAIR = 'playfair',
-    HILL = 'hill',
-    AFFINE = 'affine',
+    VIGENERE = 'Vigenere Cipher Standard'
+    VIGENERE_AUTOKEY = 'Auto-key Vigenere Cipher'
+    VIGENERE_FULL = 'Full Vigenere Cipher'
+    PLAYFAIR = 'Playfair Cipher',
+    HILL = 'Hill Cipher',
+    AFFINE = 'Affine Cipher',
+    VIGENERE_EXTENDED = 'Extended Vigenere Cipher',
+    SUPER_ENCRYPTION = 'Super Encryption',
+    ENIGMA = 'Enigma Cipher'
 
     @staticmethod
     def list():
