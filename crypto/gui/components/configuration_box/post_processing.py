@@ -10,7 +10,7 @@ class PostProcessing(QGroupBox):
         self.setup_ui()
 
     def setup_ui(self):
-        self.setTitle('Output Configuration')
+        self.setTitle('Post Processing')
         self.layout = QVBoxLayout()
 
         self.btn_group = QButtonGroup()
