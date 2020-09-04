@@ -25,8 +25,7 @@ class MainWindow(QMainWindow):
 
         self.main_input = MainInput(self.central_widget)
 
-        self.configuration_box = ConfigurationBox('Configuration',
-                                                  self.central_widget)
+        self.configuration_box = ConfigurationBox(self.central_widget)
 
         self.layout.addWidget(self.algorithm_list)
         self.layout.addWidget(self.main_input)
