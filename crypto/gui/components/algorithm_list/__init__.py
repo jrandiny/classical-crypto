@@ -3,18 +3,18 @@ from PyQt5.QtCore import QSize
 
 from crypto.engine.engine_factory import EngineType
 from crypto.gui.encryption_parms import EncryptionParms
+from crypto.engine.engine_factory import EngineType
 
 
 class AlgorithmList(QGroupBox):
-    def __init__(self, title: str, list_of_algorithm: list, parent: QWidget = None):
+    def __init__(self, parent: QWidget = None):
         super(AlgorithmList, self).__init__(parent=parent)
 
-        self.list_of_algorithm = list_of_algorithm
-        self.title = title
+        self.list_of_algorithm = EngineType.list()
         self.setup_ui()
 
     def setup_ui(self):
-        self.setTitle(self.title)
+        self.setTitle('Algorithms')
         self.layout = QVBoxLayout()
 
         self.btn_group = QButtonGroup()

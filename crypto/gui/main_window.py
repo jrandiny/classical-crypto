@@ -27,13 +27,11 @@ class MainWindow(QMainWindow):
         self.setMinimumSize(950, 600)
         self.central_widget = QtWidgets.QWidget(self)
 
-        self.layout = QHBoxLayout()
-        self.algorithm_list = AlgorithmList('Algorithm', EngineType.list(), self.central_widget)
-
+        self.algorithm_list = AlgorithmList(self.central_widget)
         self.main_input = MainInput(self.central_widget)
-
         self.configuration_box = ConfigurationBox(self.central_widget)
 
+        self.layout = QHBoxLayout()
         self.layout.addWidget(self.algorithm_list)
         self.layout.addWidget(self.main_input)
         self.layout.addWidget(self.configuration_box)
@@ -43,9 +41,14 @@ class MainWindow(QMainWindow):
 
         self.main_input.tab_string.input_mode.btn_execute.clicked.connect(self.execute_string)
         self.main_input.tab_file.input_mode.btn_execute.clicked.connect(self.execute_string)
+
         output_conf_signal = self.configuration_box.post_processing.btn_group.idClicked
         output_conf_slot = self.main_input.tab_string.output_string.on_change_format
         output_conf_signal.connect(output_conf_slot)
+
+        engine_type_signal = self.algorithm_list.btn_group.idClicked
+        engine_type_slot = self.configuration_box.encryption_box.on_update_key_widget
+        engine_type_signal.connect(engine_type_slot)
 
     def show_error_dialog(self, error_msg):
         DialogWindow('Error', error_msg).exec_()
