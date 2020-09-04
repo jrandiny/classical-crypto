@@ -21,7 +21,7 @@ class EngineType(Enum):
 
     @staticmethod
     def list():
-        return list(map(lambda engine: engine.value, EngineType))
+        return list(map(lambda engine: engine, EngineType))
 
 
 class EngineFactory():
