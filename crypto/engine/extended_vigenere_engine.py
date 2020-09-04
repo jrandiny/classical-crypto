@@ -3,6 +3,7 @@ from crypto.engine.data import *
 from crypto.engine.key import *
 from crypto.engine.vigenere_engine import VigenereEngine
 from crypto.util.string_util import StringUtil
+from nptyping import NDArray
 
 import numpy as np
 import random
@@ -43,10 +44,10 @@ class ExtendedVigenereEngine(VigenereEngine):
         elif data.data_type == DataType.FILE:
             pass
 
-    def _transform_key(self, key: Key, string_array):
+    def _transform_key(self, key: Key, string_array) -> NDArray[np.int32]:
         key_array = np.frombuffer(key.data[0].encode(), np.int8)
         return np.resize(key_array, len(string_array)).astype(np.int32)
 
-    def _transform_text(self, data: Data):
+    def _transform_text(self, data: Data) -> NDArray[np.int32]:
         raw_text = StringUtil.strip_non_ascii(data.get_text())
-        return np.array([ord(ch) for ch in raw_text])
+        return np.array([ord(ch) for ch in raw_text], dtype=np.int32)

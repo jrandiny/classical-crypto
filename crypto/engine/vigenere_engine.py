@@ -1,7 +1,10 @@
 from crypto.engine.base_engine import BaseEngine, EngineCapabilities
 from crypto.engine.data import *
 from crypto.engine.key import *
+
 from crypto.util.string_util import StringUtil
+
+from nptyping import NDArray
 
 import numpy as np
 
@@ -48,10 +51,10 @@ class VigenereEngine(BaseEngine):
 
         return Data(data_type=DataType.TEXT, data=''.join(map(chr, decrypted_array)))
 
-    def _transform_key(self, key: Key, string_array):
+    def _transform_key(self, key: Key, string_array) -> NDArray[np.int32]:
         key_array = np.frombuffer(key.data[0].lower().encode(), np.int8) - ord('a')
         return np.resize(key_array, len(string_array)).astype(np.int32)
 
-    def _transform_text(self, data: Data):
+    def _transform_text(self, data: Data) -> NDArray[np.int32]:
         raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
         return (np.frombuffer(raw_text.encode(), np.int8) - ord('a')).astype(np.int32)

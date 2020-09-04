@@ -16,7 +16,7 @@ class AutokeyVigenereEngine(VigenereEngine):
 
         return super()._do_encrypt(data, key)
 
-    def complete_key(self, data: Data, key: Key):
+    def complete_key(self, data: Data, key: Key) -> Key:
         data_string = StringUtil.strip_non_alphabet(data.get_text())
         key_string = key.data[0]
 
