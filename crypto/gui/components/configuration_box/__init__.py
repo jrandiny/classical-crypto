@@ -17,7 +17,12 @@ class ConfigurationBox(QGroupBox):
         self.layout = QVBoxLayout()
 
         self.encryption_key = EncryptionKey()
+        self.encryption_key.setSizePolicy(QSizePolicy.Expanding,
+                                          QSizePolicy.Expanding)
+
         self.post_processing = PostProcessing()
+        self.post_processing.setSizePolicy(QSizePolicy.Expanding,
+                                           QSizePolicy.Expanding)
 
         self.layout.addWidget(self.encryption_key)
         self.layout.addWidget(self.post_processing)

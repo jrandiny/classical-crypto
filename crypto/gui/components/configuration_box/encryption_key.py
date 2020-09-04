@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout
+from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout, QSizePolicy, QSpacerItem
 
 
 class EncryptionKey(QWidget):
@@ -7,11 +7,19 @@ class EncryptionKey(QWidget):
         self.setupUi()
 
     def setupUi(self):
-        self.key_lbl = QLabel()
-        self.key_lbl.setText('Encryption Key')
+        self.lbl_key = QLabel()
+        self.lbl_key.setText('Encryption Key')
+        self.lbl_key.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.edit_text = QLineEdit()
+        self.key_input = QLineEdit()
+        self.key_input.setSizePolicy(QSizePolicy.Expanding,
+                                     QSizePolicy.Minimum)
+
+        self.spacer = QSpacerItem(10, 10, QSizePolicy.Expanding,
+                                  QSizePolicy.MinimumExpanding)
+
         self.layout = QVBoxLayout()
-        self.layout.addWidget(self.key_lbl)
-        self.layout.addWidget(self.edit_text)
+        self.layout.addWidget(self.lbl_key)
+        self.layout.addWidget(self.key_input)
+        self.layout.addSpacerItem(self.spacer)
         self.setLayout(self.layout)

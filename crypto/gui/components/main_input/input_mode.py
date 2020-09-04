@@ -24,7 +24,7 @@ class InputMode(QWidget):
         self.v_layout = QVBoxLayout()
 
         self.h_layout_1.addWidget(self.lbl_mode_title)
-        self.h_layout_1.addItem(self.spacer)
+        self.h_layout_1.addSpacerItem(self.spacer)
         self.h_layout_1.addWidget(self.lbl_mode_value)
         self.h_layout_2.addWidget(self.btn_switch)
         self.h_layout_2.addWidget(self.btn_execute)
