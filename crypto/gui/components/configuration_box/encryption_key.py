@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout, QSizePolicy, QSpacerItem, QGroupBox
 
 from crypto.gui.encryption_parms import EncryptionParms
+from crypto.engine.key import Key, KeyType
 
 
 class EncryptionKey(QGroupBox):
@@ -23,7 +24,7 @@ class EncryptionKey(QGroupBox):
         self.layout.setSpacing(20)
 
         self.setLayout(self.layout)
-        self.key_input.textEdited.connect(self.on_key_change)
 
-    def on_key_change(self, text):
-        EncryptionParms.get_instance().raw_key = text
+    def get_key(self) -> Key:
+        text = self.key_input.text()
+        return Key(KeyType.STRING, [text])

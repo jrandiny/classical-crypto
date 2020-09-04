@@ -1,6 +1,8 @@
-from PyQt5.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout
-from PyQt5.QtCore import QSize
+from PyQt5.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QSizePolicy
+from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QClipboard, QGuiApplication
+
+from crypto.engine.data import Data, DataType
 
 
 class InputString(QWidget):
@@ -12,6 +14,9 @@ class InputString(QWidget):
     def setup_ui(self):
         self.text_edit = QTextEdit()
         self.text_edit.setEnabled(self.enabled)
+        self.text_edit.setAcceptRichText(False)
+        self.text_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+
         self.copy_button = QPushButton('Copy to Clipboard')
 
         self.layout = QVBoxLayout()
@@ -26,3 +31,7 @@ class InputString(QWidget):
         clip_board = QGuiApplication.clipboard()
         clip_board.clear(mode=clip_board.Clipboard)
         clip_board.setText(text, mode=clip_board.Clipboard)
+
+    def get_data(self) -> Data:
+        text = self.text_edit.toPlainText()
+        return Data(DataType.TEXT, text)

@@ -23,8 +23,3 @@ class TabString(QWidget):
         self.layout.addWidget(self.output_string)
 
         self.setLayout(self.layout)
-        self.input_string.text_edit.textChanged.connect(self.on_input_change)
-
-    def on_input_change(self):
-        text = self.input_string.text_edit.toPlainText()
-        EncryptionParms.get_instance().raw_input = text
