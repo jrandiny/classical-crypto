@@ -1,5 +1,9 @@
+from crypto.util.file_util import FileUtil
 from enum import Enum
-from typing import Union, TextIO
+from typing import Union, BinaryIO
+
+import os
+import shutil
 
 
 class DataType(Enum):
@@ -21,9 +25,18 @@ class Data:
         return self._data
 
     @property
-    def file_handle(self) -> TextIO:
+    def file_handle(self) -> BinaryIO:
         assert self.data_type == DataType.FILE
-        return open('asd', 'r')
+        return open(self._data, 'rb')
+
+    def move_file(self, new_path: str):
+        assert self.data_type == DataType.FILE
+
+        if not os.path.isfile(self._data):
+            raise Exception('Source file not found')
+
+        shutil.move(self._data, new_path)
+        self._data = new_path
 
     @property
     def path(self) -> str:
