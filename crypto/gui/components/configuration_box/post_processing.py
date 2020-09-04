@@ -1,28 +1,36 @@
 from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout, QRadioButton, QButtonGroup, QSizePolicy, QSpacerItem, QGroupBox
 
+from crypto.gui.encryption_parameter import OutputType
+
 
 class PostProcessing(QGroupBox):
     def __init__(self, parent: QWidget = None):
         super(PostProcessing, self).__init__(parent=parent)
+        self.output_type_list = OutputType.list()
         self.setupUi()
 
     def setupUi(self):
         self.setTitle('Output Configuration')
-
-        self.btn_remove_whitespace = QRadioButton('Remove whitespace')
-        self.btn_split = QRadioButton('Group in 5')
+        self.layout = QVBoxLayout()
 
         self.btn_group = QButtonGroup()
-        self.btn_group.addButton(self.btn_remove_whitespace)
-        self.btn_group.addButton(self.btn_split)
+
+        for i in range(len(self.output_type_list)):
+            radio_button = QRadioButton(self.output_type_list[i].value)
+            self.btn_group.addButton(radio_button, i)
+            self.layout.addWidget(radio_button)
+
+            if i == 0:
+                radio_button.animateClick()
 
         self.spacer = QSpacerItem(10, 10, QSizePolicy.Expanding,
                                   QSizePolicy.MinimumExpanding)
 
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.btn_remove_whitespace)
-        self.layout.addWidget(self.btn_split)
         self.layout.addSpacerItem(self.spacer)
-
         self.layout.setSpacing(20)
         self.setLayout(self.layout)
+
+        self.btn_group.idClicked.connect(self.set_output_type)
+
+    def set_output_type(self, id):
+        print(self.output_type_list[id])
