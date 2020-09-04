@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout, QCheckBox
+from PyQt5.QtWidgets import QLineEdit, QLabel, QWidget, QVBoxLayout, QRadioButton, QButtonGroup
 
 
 class PostProcessing(QWidget):
@@ -10,11 +10,14 @@ class PostProcessing(QWidget):
         self.lbl_title = QLabel()
         self.lbl_title.setText('Output')
 
-        self.btn_remove_whitespace = QCheckBox('Remove whitespace')
-        self.btn_group = QCheckBox('Group in 5 Characters')
+        self.btn_group = QButtonGroup()
+        self.btn_remove_whitespace = QRadioButton('Remove whitespace')
+        self.btn_split = QRadioButton('Group in 5')
+        self.btn_group.addButton(self.btn_remove_whitespace)
+        self.btn_group.addButton(self.btn_split)
 
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.lbl_title)
         self.layout.addWidget(self.btn_remove_whitespace)
-        self.layout.addWidget(self.btn_group)
+        self.layout.addWidget(self.btn_split)
         self.setLayout(self.layout)
