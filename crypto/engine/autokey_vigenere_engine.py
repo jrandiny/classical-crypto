@@ -8,7 +8,7 @@ import numpy as np
 
 class AutokeyVigenereEngine(VigenereEngine):
     def _do_encrypt(self, data: Data, key: Key) -> Data:
-        data_string = StringUtil.strip_non_alphabet(data.get_text())
+        data_string = StringUtil.strip_non_alphabet(data.text)
         key_string = key.data[0]
 
         if len(data_string) != len(key_string):
@@ -17,7 +17,7 @@ class AutokeyVigenereEngine(VigenereEngine):
         return super()._do_encrypt(data, key)
 
     def complete_key(self, data: Data, key: Key) -> Key:
-        data_string = StringUtil.strip_non_alphabet(data.get_text())
+        data_string = StringUtil.strip_non_alphabet(data.text)
         key_string = key.data[0]
 
         delta_length = len(data_string) - len(key_string)

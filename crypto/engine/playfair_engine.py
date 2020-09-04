@@ -9,10 +9,10 @@ import numpy as np
 class PlayfairEngine(BaseEngine):
     def __init__(self):
         super().__init__(
-            EngineCapabilities(support_file=False,
-                               support_text=True,
-                               key_type=KeyType.STRING,
-                               key_length=1))
+            EngineCapabilities(
+                support_file=False, support_text=True, key_type=KeyType.STRING, key_length=1
+            )
+        )
 
     def generate_random_key(self) -> Key:
         return Key(KeyType.STRING, [StringUtil.generate_random_string(8)])
@@ -25,19 +25,15 @@ class PlayfairEngine(BaseEngine):
 
         for bigram in string_array:
             cipher = ''
-            first_pos = list(
-                map(lambda x: x[0], np.where(full_key_array == bigram[0])))
-            second_pos = list(
-                map(lambda x: x[0], np.where(full_key_array == bigram[1])))
+            first_pos = list(map(lambda x: x[0], np.where(full_key_array == bigram[0])))
+            second_pos = list(map(lambda x: x[0], np.where(full_key_array == bigram[1])))
 
             if first_pos[0] == second_pos[0]:
                 cipher = full_key_array[first_pos[0]][(first_pos[1] + 1) % 5]
-                cipher += full_key_array[second_pos[0]][(second_pos[1] + 1) %
-                                                        5]
+                cipher += full_key_array[second_pos[0]][(second_pos[1] + 1) % 5]
             elif first_pos[1] == second_pos[1]:
                 cipher = full_key_array[(first_pos[0] + 1) % 5][first_pos[1]]
-                cipher += full_key_array[(second_pos[0] + 1) %
-                                         5][second_pos[1]]
+                cipher += full_key_array[(second_pos[0] + 1) % 5][second_pos[1]]
             else:
                 cipher = full_key_array[first_pos[0]][second_pos[1]]
                 cipher += full_key_array[second_pos[0]][first_pos[1]]
@@ -54,10 +50,8 @@ class PlayfairEngine(BaseEngine):
 
         for bigram in string_array:
             plain = ''
-            first_pos = list(
-                map(lambda x: x[0], np.where(full_key_array == bigram[0])))
-            second_pos = list(
-                map(lambda x: x[0], np.where(full_key_array == bigram[1])))
+            first_pos = list(map(lambda x: x[0], np.where(full_key_array == bigram[0])))
+            second_pos = list(map(lambda x: x[0], np.where(full_key_array == bigram[1])))
 
             if first_pos[0] == second_pos[0]:
                 plain = full_key_array[first_pos[0]][(first_pos[1] - 1) % 5]
@@ -85,11 +79,11 @@ class PlayfairEngine(BaseEngine):
         return np.reshape(key_array, (5, 5))
 
     def _transform_cipher(self, data: Data):
-        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
+        raw_text = StringUtil.strip_non_alphabet(data.text).lower()
         return np.array(StringUtil.split_to_group(raw_text, 2).split(' '))
 
     def _transform_text(self, data: Data):
-        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
+        raw_text = StringUtil.strip_non_alphabet(data.text).lower()
         no_space_text = StringUtil.remove_space(raw_text)
         grouped_text = []
 
@@ -130,6 +124,6 @@ if __name__ == "__main__":
     print(engine._transform_key(test_key))
     print(engine._transform_text(test_data))
     result = engine._do_encrypt(test_data, test_key)
-    print(result.get_text())
+    print(result.text)
     result = engine._do_decrypt(result, test_key)
-    print(result.get_text())
+    print(result.text)

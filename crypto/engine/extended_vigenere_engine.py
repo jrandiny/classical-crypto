@@ -49,5 +49,5 @@ class ExtendedVigenereEngine(VigenereEngine):
         return np.resize(key_array, len(string_array)).astype(np.int32)
 
     def _transform_text(self, data: Data) -> NDArray[np.int32]:
-        raw_text = StringUtil.strip_non_ascii(data.get_text())
+        raw_text = StringUtil.strip_non_ascii(data.text)
         return np.array([ord(ch) for ch in raw_text], dtype=np.int32)

@@ -15,11 +15,17 @@ class Data:
         else:
             self._data = data
 
-    def get_text(self) -> str:
+    @property
+    def text(self) -> str:
         assert self.data_type == DataType.TEXT
         return self._data
 
-    def get_file(self) -> TextIO:
+    @property
+    def file_handle(self) -> TextIO:
         assert self.data_type == DataType.FILE
-        abc = open('asdas', 'r')
+        return open('asd', 'r')
+
+    @property
+    def path(self) -> str:
+        assert self.data_type == DataType.FILE
         return self._data

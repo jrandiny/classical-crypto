@@ -43,7 +43,7 @@ class FullVigenereEngine(VigenereEngine):
         return Data(data_type=DataType.TEXT, data=''.join(encrypted_array))
 
     def _do_decrypt(self, data: Data, key: Key) -> Data:
-        string_array = StringUtil.strip_non_alphabet(data.get_text())
+        string_array = StringUtil.strip_non_alphabet(data.text)
 
         full_key_array = self._transform_key(key, string_array)
 

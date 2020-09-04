@@ -79,9 +79,9 @@ def test_encrypt_decrypt():
     encrypted_data = engine.encrypt(test_data, generated_key)
 
     assert encrypted_data.data_type == DataType.TEXT
-    assert encrypted_data.get_text() == 'zsmehkzvdfv'
+    assert encrypted_data.text == 'zsmehkzvdfv'
 
     decrypted_data = engine.decrypt(encrypted_data, generated_key)
 
     assert decrypted_data.data_type == DataType.TEXT
-    assert decrypted_data.get_text() == 'exampletext'
+    assert decrypted_data.text == 'exampletext'

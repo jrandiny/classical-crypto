@@ -56,5 +56,5 @@ class VigenereEngine(BaseEngine):
         return np.resize(key_array, len(string_array)).astype(np.int32)
 
     def _transform_text(self, data: Data) -> NDArray[np.int32]:
-        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
+        raw_text = StringUtil.strip_non_alphabet(data.text).lower()
         return (np.frombuffer(raw_text.encode(), np.int8) - ord('a')).astype(np.int32)

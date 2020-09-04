@@ -14,10 +14,10 @@ from typing import List
 class HillEngine(BaseEngine):
     def __init__(self):
         super().__init__(
-            EngineCapabilities(support_file=False,
-                               support_text=True,
-                               key_type=KeyType.NUMBER,
-                               key_length=-1))
+            EngineCapabilities(
+                support_file=False, support_text=True, key_type=KeyType.NUMBER, key_length=-1
+            )
+        )
 
     def generate_random_key(self) -> Key:
         # Key consists of consecutively n and one matrix object of n x n
@@ -37,8 +37,7 @@ class HillEngine(BaseEngine):
 
         encrypted_array += ord('a')
 
-        return Data(data_type=DataType.TEXT,
-                    data=''.join(map(chr, encrypted_array)))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, encrypted_array)))
 
     def _do_decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
@@ -54,8 +53,7 @@ class HillEngine(BaseEngine):
 
         decrypted_array += ord('a')
 
-        return Data(data_type=DataType.TEXT,
-                    data=''.join(map(chr, decrypted_array)))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, decrypted_array)))
 
     def _check_key_valid(self, key: Key):
         key_length = len(key.data[1:])
@@ -64,7 +62,7 @@ class HillEngine(BaseEngine):
             raise Exception('Matrix must be square')
 
     def _transform_text(self, data: Data, key: Key):
-        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
+        raw_text = StringUtil.strip_non_alphabet(data.text).lower()
         no_space_text = StringUtil.remove_space(raw_text)
         dim = key.data[0]
 

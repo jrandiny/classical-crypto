@@ -4,7 +4,7 @@ from crypto.engine.vigenere_engine import VigenereEngine
 
 def test_list_engine():
     engine_list = EngineType.list()
-    assert len(engine_list) == 4
+    assert len(engine_list) == 6
 
 
 def test_create_engine():

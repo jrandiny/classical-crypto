@@ -13,18 +13,18 @@ from typing import List
 class AffineEngine(BaseEngine):
     def __init__(self):
         super().__init__(
-            EngineCapabilities(support_file=False,
-                               support_text=True,
-                               key_type=KeyType.NUMBER,
-                               key_length=3))
+            EngineCapabilities(
+                support_file=False, support_text=True, key_type=KeyType.NUMBER, key_length=3
+            )
+        )
 
     def generate_random_key(self) -> Key:
         # Key consists of consecutively n, m, b, hence length=3
-        return Key(KeyType.NUMBER, [
-            26,
-            random.choice([1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23]),
-            random.randint(1, 25)
-        ])
+        return Key(
+            KeyType.NUMBER,
+            [26, random.choice([1, 3, 5, 7, 9, 11, 15, 17, 19, 21, 23]),
+             random.randint(1, 25)]
+        )
 
     def _do_encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
@@ -38,8 +38,7 @@ class AffineEngine(BaseEngine):
         encrypted_array = (string_array * m + b) % n
         encrypted_array += ord('a')
 
-        return Data(data_type=DataType.TEXT,
-                    data=''.join(map(chr, encrypted_array)))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, encrypted_array)))
 
     def _do_decrypt(self, data: Data, key: Key) -> Data:
         """Decrypt data"""
@@ -53,8 +52,7 @@ class AffineEngine(BaseEngine):
         decrypted_array = (string_array - b) * m_inverse % n
         decrypted_array += ord('a')
 
-        return Data(data_type=DataType.TEXT,
-                    data=''.join(map(chr, decrypted_array)))
+        return Data(data_type=DataType.TEXT, data=''.join(map(chr, decrypted_array)))
 
     def _check_key_valid(self, key: Key):
         n = key.data[0]
@@ -67,7 +65,7 @@ class AffineEngine(BaseEngine):
             raise Exception('n and m must be relative prime')
 
     def _transform_text(self, data: Data):
-        raw_text = StringUtil.strip_non_alphabet(data.get_text()).lower()
+        raw_text = StringUtil.strip_non_alphabet(data.text).lower()
         no_space_text = StringUtil.remove_space(raw_text)
 
         transformed = np.frombuffer(raw_text.encode(), np.int8) - ord('a')
