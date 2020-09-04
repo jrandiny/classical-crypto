@@ -4,12 +4,14 @@ from PyQt5.QtGui import QClipboard, QGuiApplication
 
 
 class InputString(QWidget):
-    def __init__(self, parent: QWidget = None):
+    def __init__(self, enabled: bool = True, parent: QWidget = None):
         super(InputString, self).__init__(parent=parent)
-        self.setupUi()
+        self.enabled = enabled
+        self.setup_ui()
 
-    def setupUi(self):
+    def setup_ui(self):
         self.text_edit = QTextEdit()
+        self.text_edit.setEnabled(self.enabled)
         self.copy_button = QPushButton('Copy to Clipboard')
 
         self.layout = QVBoxLayout()

@@ -1,16 +1,16 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
 from PyQt5.QtCore import Qt
 
-from crypto.gui.encryption_parameter import ModeType
+from crypto.gui.encryption_parameter import ModeType, EncryptionParms
 
 
 class InputMode(QWidget):
     def __init__(self, parent=None):
         super(InputMode, self).__init__(parent)
         self.is_encrypt = False
-        self.setupUi()
+        self.setup_ui()
 
-    def setupUi(self):
+    def setup_ui(self):
         self.btn_switch = QPushButton('Switch Mode')
         self.btn_execute = QPushButton('Execute')
         self.lbl_mode_title = QLabel('Mode')
@@ -21,8 +21,7 @@ class InputMode(QWidget):
         self.lbl_colon.setAlignment(Qt.AlignCenter)
         self.lbl_mode_value.setAlignment(Qt.AlignLeft)
 
-        self.spacer = QSpacerItem(20, 10, QSizePolicy.Fixed,
-                                  QSizePolicy.Minimum)
+        self.spacer = QSpacerItem(20, 10, QSizePolicy.Fixed, QSizePolicy.Minimum)
 
         self.h_layout_1 = QHBoxLayout()
         self.h_layout_2 = QHBoxLayout()
@@ -40,11 +39,18 @@ class InputMode(QWidget):
         self.setLayout(self.v_layout)
 
         self.btn_switch.clicked.connect(self.switch_mode)
+        self.btn_execute.clicked.connect(self.execute)
         self.btn_switch.animateClick()
 
     def switch_mode(self):
         self.is_encrypt = not self.is_encrypt
         if self.is_encrypt:
-            self.lbl_mode_value.setText(ModeType.ENCRYPT.value)
+            mode = ModeType.ENCRYPT
         else:
-            self.lbl_mode_value.setText(ModeType.DECRYPT.value)
+            mode = ModeType.DECRYPT
+
+        EncryptionParms.get_instance().mode = mode
+        self.lbl_mode_value.setText(mode.value)
+
+    def execute(self):
+        EncryptionParms.get_instance().print_info()

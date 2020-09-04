@@ -8,18 +8,16 @@ from crypto.gui.components.configuration_box.post_processing import PostProcessi
 class ConfigurationBox(QWidget):
     def __init__(self, parent: QWidget = None):
         super(ConfigurationBox, self).__init__(parent=parent)
-        self.setupUi()
+        self.setup_ui()
 
-    def setupUi(self):
+    def setup_ui(self):
         self.layout = QVBoxLayout()
 
         self.encryption_key = EncryptionKey()
-        self.encryption_key.setSizePolicy(QSizePolicy.Expanding,
-                                          QSizePolicy.Expanding)
+        self.encryption_key.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.post_processing = PostProcessing()
-        self.post_processing.setSizePolicy(QSizePolicy.Expanding,
-                                           QSizePolicy.Expanding)
+        self.post_processing.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.layout.addWidget(self.encryption_key)
         self.layout.addWidget(self.post_processing)

@@ -2,20 +2,18 @@ from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QButtonGroup, QRadi
 from PyQt5.QtCore import QSize
 
 from crypto.engine.engine_factory import EngineType
+from crypto.gui.encryption_parameter import EncryptionParms
 
 
 class AlgorithmList(QGroupBox):
-    def __init__(self,
-                 title: str,
-                 list_of_algorithm: list,
-                 parent: QWidget = None):
+    def __init__(self, title: str, list_of_algorithm: list, parent: QWidget = None):
         super(AlgorithmList, self).__init__(parent=parent)
 
         self.list_of_algorithm = list_of_algorithm
         self.title = title
-        self.setupUi()
+        self.setup_ui()
 
-    def setupUi(self):
+    def setup_ui(self):
         self.setTitle(self.title)
         self.layout = QVBoxLayout()
 
@@ -34,4 +32,4 @@ class AlgorithmList(QGroupBox):
         self.btn_group.idClicked.connect(self.set_engine_type)
 
     def set_engine_type(self, id):
-        print(self.list_of_algorithm[id])
+        EncryptionParms.get_instance().engine_type = self.list_of_algorithm[id]

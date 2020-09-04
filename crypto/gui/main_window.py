@@ -11,16 +11,15 @@ from crypto.engine.engine_factory import EngineType
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.setupUi()
+        self.setup_ui()
 
-    def setupUi(self):
+    def setup_ui(self):
         self.setWindowTitle('Classical Cryptography')
-        self.setMinimumSize(870, 600)
+        self.setMinimumSize(950, 600)
         self.central_widget = QtWidgets.QWidget(self)
 
         self.layout = QHBoxLayout()
-        self.algorithm_list = AlgorithmList('Algorithm', EngineType.list(),
-                                            self.central_widget)
+        self.algorithm_list = AlgorithmList('Algorithm', EngineType.list(), self.central_widget)
 
         self.main_input = MainInput(self.central_widget)
 
