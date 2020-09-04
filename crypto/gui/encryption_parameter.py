@@ -1,7 +1,10 @@
+from __future__ import annotations
+from enum import Enum
+
 from crypto.engine.engine_factory import *
+from crypto.engine.base_engine import BaseEngine
 from crypto.engine.data import *
 from crypto.engine.key import *
-from enum import Enum
 
 
 class ModeType(Enum):
@@ -18,25 +21,41 @@ class OutputType(Enum):
         return list(map(lambda out_type: out_type, OutputType))
 
 
-class EncryptionParameter:
+class EncryptionParms:
     __instance = None
 
     def __init__(self):
-        if EncryptionParameter.__instance is not None:
+        if EncryptionParms.__instance is not None:
             raise Exception('Only allowed 1 instance')
         else:
-            EncryptionParameter.__instance = self
-            self.method = ModeType.ENCRYPT
+            EncryptionParms.__instance = self
+            self.mode = None
             self.engine_type = None
-            self.key = None
-            self.data = None
-            self.output_configuration = OutputType.NO_SPACE
+            self.output_conf = None
+            self.raw_input = None
+            self.raw_key = None
+            self.file_in_path = None
+            self.file_out_path = None
 
-    def is_parameter_valid(self):
+    def print_info(self):
+        print('***Encryption Parameters***')
+        print('Mode:', self.mode)
+        print('Engine Type:', self.engine_type)
+        print('Raw Input:', self.raw_input)
+        print('Raw Key:', self.raw_key)
+        print('Input File Path:', self.file_in_path)
+        print('Output File Path:', self.file_out_path)
+        print('Output Configuration:', self.output_conf)
+        print('***************************')
+
+    def is_parameter_valid(self) -> bool:
         return True
 
+    def get_engine(self) -> BaseEngine:
+        return EngineFactory.create_engine(self.engine_type)
+
     @staticmethod
-    def get_instance():
-        if EncryptionParameter.__instance is None:
-            EncryptionParameter()
-        return EncryptionParameter.__instance
+    def get_instance() -> EncryptionParms:
+        if EncryptionParms.__instance is None:
+            EncryptionParms()
+        return EncryptionParms.__instance
