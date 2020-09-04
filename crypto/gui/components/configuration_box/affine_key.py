@@ -10,6 +10,7 @@ class AffineKey(BaseKey):
     def __init__(self, parent: QWidget = None):
         super().__init__(parent)
         self.setup_ui()
+        self.m_shift = 1
 
     def setup_ui(self):
         self.lbl_mul = QLabel('Multiplicative Shift:')
@@ -34,6 +35,12 @@ class AffineKey(BaseKey):
         self.v_layout.addLayout(self.h_layout_2)
         self.setLayout(self.v_layout)
 
+        self.combo_box.currentTextChanged.connect(self.update_m_shift)
+
+    def update_m_shift(self, value: str):
+        self.m_shift = int(value)
+
     def build_key(self):
-        text = self.line_edit.text()
-        return Key(KeyType.STRING, [text])
+        b = self.spin_box.value()
+        m = self.m_shift
+        return Key(KeyType.NUMBER, [26, m, b])
