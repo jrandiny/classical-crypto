@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
 
 from crypto.gui.components.main_input.input_file import InputFile
 from crypto.gui.components.main_input.input_mode import InputMode
@@ -15,8 +15,16 @@ class TabFile(QWidget):
         self.input_mode = InputMode()
 
         self.layout = QVBoxLayout()
+        self.layout.addSpacerItem(
+            QSpacerItem(30, 30, QSizePolicy.Expanding,
+                        QSizePolicy.MinimumExpanding))
         self.layout.addWidget(self.input_file)
         self.layout.addWidget(self.output_file)
+        self.layout.addSpacerItem(
+            QSpacerItem(30, 50, QSizePolicy.Expanding, QSizePolicy.Fixed))
         self.layout.addWidget(self.input_mode)
+        self.layout.addSpacerItem(
+            QSpacerItem(30, 30, QSizePolicy.Expanding,
+                        QSizePolicy.MinimumExpanding))
 
         self.setLayout(self.layout)

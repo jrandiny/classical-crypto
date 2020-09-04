@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QPushButton, QTextEdit, QHBoxLayout
+from PyQt5.QtWidgets import QWidget, QPushButton, QLineEdit, QHBoxLayout, QSizePolicy
 from PyQt5.QtCore import QSize
 
 
@@ -9,11 +9,16 @@ class InputFile(QWidget):
         self.setupUi()
 
     def setupUi(self):
-        self.text_edit = QTextEdit()
+        self.line_edit = QLineEdit()
+        self.line_edit.setEnabled(False)
+        self.line_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+
         self.copy_button = QPushButton(self.btn_text)
+        self.copy_button.setSizePolicy(QSizePolicy.Minimum,
+                                       QSizePolicy.Minimum)
 
         self.layout = QHBoxLayout()
-        self.layout.addWidget(self.text_edit)
+        self.layout.addWidget(self.line_edit)
         self.layout.addWidget(self.copy_button)
 
         self.setLayout(self.layout)
