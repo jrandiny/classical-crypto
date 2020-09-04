@@ -5,12 +5,7 @@ from PyQt5.QtCore import QSize
 from crypto.gui.components.algorithm_list import AlgorithmList
 from crypto.gui.components.main_input import MainInput
 from crypto.gui.components.configuration_box import ConfigurationBox
-
-list_of_algorithm = [
-    'Playfair Cipher', 'Auto-key Vigenere Cipher', 'Full Vigenere Cipher',
-    'Vigenere Cipher Standard ', 'Affine Cipher', 'Hill Cipher',
-    'Extended Vigenere Cipher', 'Super Encryption', 'Enigma Cipher'
-]
+from crypto.engine.engine_factory import EngineType
 
 
 class MainWindow(QMainWindow):
@@ -25,15 +20,12 @@ class MainWindow(QMainWindow):
         self.central_widget.setObjectName("central_widget")
 
         self.layout = QHBoxLayout()
-
-        self.algorithm_list = AlgorithmList('Algorithm', list_of_algorithm,
-                                            QSize(241, 512),
+        self.algorithm_list = AlgorithmList('Algorithm', EngineType.list(),
                                             self.central_widget)
 
-        self.main_input = MainInput(QSize(361, 531), self.central_widget)
+        self.main_input = MainInput(self.central_widget)
 
         self.configuration_box = ConfigurationBox('Configuration',
-                                                  QSize(221, 521),
                                                   self.central_widget)
 
         self.layout.addWidget(self.algorithm_list)

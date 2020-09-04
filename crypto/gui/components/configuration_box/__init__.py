@@ -6,10 +6,9 @@ from crypto.gui.components.configuration_box.post_processing import PostProcessi
 
 
 class ConfigurationBox(QGroupBox):
-    def __init__(self, title: str, size: QSize, parent: QWidget = None):
+    def __init__(self, title: str, parent: QWidget = None):
         super(ConfigurationBox, self).__init__(parent=parent)
 
-        self.size = size
         self.title = title
         self.setupUi()
 
@@ -25,7 +24,4 @@ class ConfigurationBox(QGroupBox):
 
         self.setLayout(self.layout)
         self.layout.setSpacing(20)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        self.setBaseSize(self.size.width(), self.size.height())
-        print(self.size.width(), self.size.height())
-        print(self.width(), self.height())
+        # self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)

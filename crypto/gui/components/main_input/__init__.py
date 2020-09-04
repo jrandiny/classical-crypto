@@ -6,7 +6,7 @@ from crypto.gui.components.main_input.tab_string import TabString
 
 
 class MainInput(QTabWidget):
-    def __init__(self, size: QSize, parent: QWidget = None):
+    def __init__(self, parent: QWidget = None):
         super(MainInput, self).__init__(parent=parent)
         self.setupUi()
 

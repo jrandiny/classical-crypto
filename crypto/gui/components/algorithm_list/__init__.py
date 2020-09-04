@@ -6,12 +6,10 @@ class AlgorithmList(QGroupBox):
     def __init__(self,
                  title: str,
                  list_of_algorithm: list,
-                 size: QSize,
                  parent: QWidget = None):
         super(AlgorithmList, self).__init__(parent=parent)
 
         self.list_of_algorithm = list_of_algorithm
-        self.size = size
         self.title = title
         self.setupUi()
 
@@ -27,7 +25,4 @@ class AlgorithmList(QGroupBox):
 
         self.setLayout(self.layout)
         self.layout.setSpacing(20)
-        self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
-        self.setBaseSize(self.size.width(), self.size.height())
-        print(self.size.width(), self.size.height())
-        print(self.width(), self.height())
+        # self.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
