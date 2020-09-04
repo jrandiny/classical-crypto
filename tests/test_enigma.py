@@ -8,21 +8,24 @@ def test_init():
 def test_rotor_init():
     rotor_1 = EnigmaRotor('ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'EKMFLGDQVZNTOWYHXUSPAIBRCJ', ['B'])
 
-    # A -> E
+    # A -> r-rotor-l -> E
     assert rotor_1.route(0) == 4
 
-    # Y -> C
+    # Y -> r-rotor-l -> C
     assert rotor_1.route(24) == 2
 
-    # J -> Z
+    # J -> r-rotor-l -> Z
     assert rotor_1.route(9) == 25
 
     assert not rotor_1.rotate()
 
-    # A -> K
+    # A -> r-rotor-l -> K
     assert rotor_1.route(0) == 9
 
     assert rotor_1.rotate()
+
+    # J -> l-rotor-r -> X
+    assert rotor_1.route(9, True) == 2
 
 
 def test_generate_key():
