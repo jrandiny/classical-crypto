@@ -12,11 +12,11 @@ class EngineType(Enum):
     VIGENERE = 'Vigenere Cipher Standard'
     VIGENERE_AUTOKEY = 'Auto-key Vigenere Cipher'
     VIGENERE_FULL = 'Full Vigenere Cipher'
-    PLAYFAIR = 'Playfair Cipher',
-    HILL = 'Hill Cipher',
-    AFFINE = 'Affine Cipher',
-    VIGENERE_EXTENDED = 'Extended Vigenere Cipher',
-    SUPER_ENCRYPTION = 'Super Encryption',
+    PLAYFAIR = 'Playfair Cipher'
+    HILL = 'Hill Cipher'
+    AFFINE = 'Affine Cipher'
+    VIGENERE_EXTENDED = 'Extended Vigenere Cipher'
+    SUPER_ENCRYPTION = 'Super Encryption'
     ENIGMA = 'Enigma Cipher'
 
     @staticmethod
