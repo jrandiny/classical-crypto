@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel
+from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
+from PyQt5.QtCore import Qt
 
 
 class InputMode(QWidget):
@@ -12,11 +13,18 @@ class InputMode(QWidget):
         self.lbl_mode_title = QLabel('Mode:')
         self.lbl_mode_value = QLabel('Encrypt')
 
+        self.lbl_mode_title.setAlignment(Qt.AlignRight)
+        self.lbl_mode_value.setAlignment(Qt.AlignLeft)
+
+        self.spacer = QSpacerItem(20, 10, QSizePolicy.Fixed,
+                                  QSizePolicy.Minimum)
+
         self.h_layout_1 = QHBoxLayout()
         self.h_layout_2 = QHBoxLayout()
         self.v_layout = QVBoxLayout()
 
         self.h_layout_1.addWidget(self.lbl_mode_title)
+        self.h_layout_1.addItem(self.spacer)
         self.h_layout_1.addWidget(self.lbl_mode_value)
         self.h_layout_2.addWidget(self.btn_switch)
         self.h_layout_2.addWidget(self.btn_execute)
