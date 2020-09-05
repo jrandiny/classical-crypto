@@ -1,4 +1,5 @@
-from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QSizePolicy, QTableWidget, QSpinBox, QHeaderView
+from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QSizePolicy, QTableWidget, QSpinBox, QHeaderView, QTableWidgetItem
+from PyQt5.QtCore import Qt
 
 from crypto.gui.components.configuration_box.base_key import BaseKey
 from crypto.engine.key import Key, KeyType
@@ -13,14 +14,13 @@ class HillKey(BaseKey):
         self.lbl_dim = QLabel('Matrix Dimension:')
         self.spin_box = QSpinBox()
         self.spin_box.setValue(2)
+        self.spin_box.setMinimum(1)
 
         self.h_layout = QHBoxLayout()
         self.h_layout.addWidget(self.lbl_dim)
         self.h_layout.addWidget(self.spin_box)
 
         self.matrix = QTableWidget()
-        self.matrix.setRowCount(2)
-        self.matrix.setColumnCount(2)
         self.matrix.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.matrix.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.matrix.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
@@ -31,13 +31,25 @@ class HillKey(BaseKey):
         self.setLayout(self.v_layout)
 
         self.spin_box.valueChanged.connect(self.update_matrix)
+        self.matrix.itemChanged.connect(self.update_alignment)
+        self.update_matrix(2)
 
     def build_key(self):
-        text = self.line_edit.text()
-        return Key(KeyType.STRING, [text])
+        dim = self.spin_box.value()
+        key = [dim]
+
+        for i in range(dim):
+            for j in range(dim):
+                el = self.matrix.item(i, j)
+                key.append(int(el.text()))
+
+        return Key(KeyType.STRING, key)
 
     def update_matrix(self, dim: int):
         self.matrix.setRowCount(dim)
         self.matrix.setColumnCount(dim)
         self.matrix.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         self.matrix.verticalHeader().setSectionResizeMode(QHeaderView.Stretch)
+
+    def update_alignment(self, item: QTableWidgetItem):
+        item.setTextAlignment(Qt.AlignCenter)
