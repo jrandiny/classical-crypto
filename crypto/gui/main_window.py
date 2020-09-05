@@ -64,8 +64,9 @@ class MainWindow(QMainWindow):
             self.show_error_dialog(str(e))
             return
 
-        if EncryptionParms.get_instance().engine_type == EngineType.VIGENERE_AUTOKEY:
-            key = engine.complete_key(data, key)
+        key = engine.complete_key(data, key)
+
+        self.configuration_box.encryption_box.apply_key(key)
 
         if mode == ModeType.ENCRYPT:
             fn = engine.encrypt

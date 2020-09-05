@@ -33,6 +33,9 @@ class EncryptionBox(QGroupBox):
         key = engine.generate_random_key()
         self.key_input.apply_key(key)
 
+    def apply_key(self, key: Key):
+        self.key_input.apply_key(key)
+
     def get_key(self) -> Key:
         return self.key_input.build_key()
 
