@@ -1,4 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QVBoxLayout, QHBoxLayout, QSizePolicy, QTableWidget, QSpinBox, QHeaderView, QLineEdit
+from PyQt5.QtCore import QRegExp
+from PyQt5.QtGui import QRegExpValidator
 
 from crypto.gui.components.configuration_box.base_key import BaseKey
 from crypto.engine.key import Key, KeyType
@@ -28,6 +30,8 @@ class EnigmaKey(BaseKey):
         self.setup_ui()
 
     def setup_ui(self):
+        alphabet_validator = QRegExp('[a-z]')
+
         self.rotor_1_lbl = QLabel('Rotor 1:')
         self.rotor_1_spinner = RotorSpinner(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
         self.rotor_1_spinner.setMinimum(1)
@@ -35,6 +39,7 @@ class EnigmaKey(BaseKey):
         self.rotor_1_spinner.setValue(1)
         self.rotor_1_offset = QLineEdit()
         self.rotor_1_offset.setText('a')
+        self.rotor_1_offset.setValidator(QRegExpValidator(alphabet_validator))
         self.rotor_1_offset.setMaxLength(1)
 
         self.rotor_1_group = QVBoxLayout()
@@ -49,6 +54,7 @@ class EnigmaKey(BaseKey):
         self.rotor_2_spinner.setValue(1)
         self.rotor_2_offset = QLineEdit()
         self.rotor_2_offset.setText('a')
+        self.rotor_2_offset.setValidator(QRegExpValidator(alphabet_validator))
         self.rotor_2_offset.setMaxLength(1)
 
         self.rotor_2_group = QVBoxLayout()
@@ -63,6 +69,7 @@ class EnigmaKey(BaseKey):
         self.rotor_3_spinner.setValue(1)
         self.rotor_3_offset = QLineEdit()
         self.rotor_3_offset.setText('a')
+        self.rotor_3_offset.setValidator(QRegExpValidator(alphabet_validator))
         self.rotor_3_offset.setMaxLength(1)
 
         self.rotor_3_group = QVBoxLayout()
