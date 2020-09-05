@@ -21,6 +21,9 @@ class StringKey(BaseKey):
         self.layout.addSpacerItem(self.spacer)
         self.setLayout(self.layout)
 
+    def apply_key(self, key: Key):
+        self.line_edit.setText(key.data[0])
+
     def build_key(self):
         text = self.line_edit.text()
         return Key(KeyType.STRING, [text])

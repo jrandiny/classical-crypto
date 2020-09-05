@@ -11,3 +11,7 @@ class BaseKey(QWidget):
     @abstractmethod
     def build_key(self) -> Key:
         pass
+
+    @abstractmethod
+    def apply_key(self, key: Key):
+        pass

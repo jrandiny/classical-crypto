@@ -24,23 +24,16 @@ class StringFullKey(BaseKey):
         self.matrix.resizeRowsToContents()
         self.matrix.setSizePolicy(QSizePolicy.MinimumExpanding, QSizePolicy.MinimumExpanding)
 
-        self.btn_generate = QPushButton('Generate Random Table')
-
         self.layout = QVBoxLayout()
         self.layout.addWidget(self.line_edit)
         self.layout.addWidget(self.matrix)
-        self.layout.addWidget(self.btn_generate)
         self.setLayout(self.layout)
 
-        self.btn_generate.clicked.connect(self.generate_matrix)
-        self.btn_generate.animateClick()
-
-    def generate_matrix(self):
-        alphabet = list(string.ascii_lowercase)
+    def apply_key(self, key: Key):
+        self.line_edit.setText(key.data[0])
         for i in range(26):
-            random.shuffle(alphabet)
             for j in range(26):
-                item = QTableWidgetItem(alphabet[j])
+                item = QTableWidgetItem(key.data[i * 26 + j + 1])
                 self.matrix.setItem(i, j, item)
 
     def build_key(self):

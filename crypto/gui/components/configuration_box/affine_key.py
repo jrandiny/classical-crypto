@@ -40,6 +40,10 @@ class AffineKey(BaseKey):
     def update_m_shift(self, value: str):
         self.m_shift = int(value)
 
+    def apply_key(self, key: Key):
+        self.combo_box.setCurrentText(str(key.data[1]))
+        self.spin_box.setValue(key.data[2])
+
     def build_key(self):
         b = self.spin_box.value()
         m = self.m_shift
