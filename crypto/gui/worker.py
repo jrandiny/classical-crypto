@@ -21,4 +21,4 @@ class Worker(QRunnable):
             result = self.function(*self.args, **self.kwargs)
             self.signals.result.emit(result)
         except Exception as e:
-            self.signals.error.emit(e)
+            self.signals.error.emit(str(e))

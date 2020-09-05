@@ -1,9 +1,5 @@
-"""
-Implementation of verification failed window
-"""
-
 from PyQt5 import QtCore, QtGui
-from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QMainWindow, QApplication, QDialog, QDialogButtonBox
+from PyQt5.QtWidgets import QVBoxLayout, QHBoxLayout, QWidget, QLabel, QPushButton, QMainWindow, QApplication, QDialog, QDialogButtonBox, QSizePolicy
 
 
 class DialogWindow(QDialog):
@@ -25,6 +21,8 @@ class DialogWindow(QDialog):
 
         self.lbl_dec = QLabel()
         self.lbl_dec.setText(self.desc)
+        self.lbl_dec.setWordWrap(True)
+        self.lbl_dec.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.layout = QVBoxLayout()
         self.layout.setSpacing(10)
