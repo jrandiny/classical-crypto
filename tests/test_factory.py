@@ -8,5 +8,7 @@ def test_list_engine():
 
 
 def test_create_engine():
-    vigenere = EngineFactory.create_engine(EngineType.VIGENERE)
-    assert type(vigenere) == VigenereEngine
+    engine_list = EngineType.list()
+
+    for engine in engine_list:
+        EngineFactory.create_engine(engine)

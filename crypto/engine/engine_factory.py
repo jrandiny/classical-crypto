@@ -1,10 +1,13 @@
 from crypto.engine.base_engine import BaseEngine
 from crypto.engine.autokey_vigenere_engine import AutokeyVigenereEngine
 from crypto.engine.full_vigenere_cipher import FullVigenereEngine
+from crypto.engine.extended_vigenere_engine import ExtendedVigenereEngine
+from crypto.engine.super_engine import SuperEngine
 from crypto.engine.vigenere_engine import VigenereEngine
 from crypto.engine.playfair_engine import PlayfairEngine
 from crypto.engine.hill_engine import HillEngine
 from crypto.engine.affine_engine import AffineEngine
+from crypto.engine.enigma_engine import EnigmaEngine
 from enum import Enum
 
 
@@ -39,5 +42,11 @@ class EngineFactory():
             return HillEngine()
         elif engine_type == EngineType.AFFINE:
             return AffineEngine()
+        elif engine_type == EngineType.VIGENERE_EXTENDED:
+            return ExtendedVigenereEngine()
+        elif engine_type == EngineType.SUPER_ENCRYPTION:
+            return SuperEngine()
+        elif engine_type == EngineType.ENIGMA:
+            return EnigmaEngine()
         else:
             raise Exception('Unsupported engine')
