@@ -29,12 +29,20 @@ class EnigmaKey(BaseKey):
         super().__init__(parent)
         self.setup_ui()
 
+    def apply_key(self, key: Key):
+        self.rotor_1_spinner.setValue(key.data[0] + 1)
+        self.rotor_1_offset.setText(chr(key.data[1] + ord('a')))
+        self.rotor_2_spinner.setValue(key.data[2] + 1)
+        self.rotor_2_offset.setText(chr(key.data[3] + ord('a')))
+        self.rotor_3_spinner.setValue(key.data[4] + 1)
+        self.rotor_3_offset.setText(chr(key.data[5] + ord('a')))
+        self.reflector_spinner.setValue(key.data[6] + 1)
+
     def setup_ui(self):
         alphabet_validator = QRegExp('[a-z]')
 
         self.rotor_1_lbl = QLabel('Rotor 1:')
-        self.rotor_1_spinner = RotorSpinner(
-            ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
+        self.rotor_1_spinner = RotorSpinner(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
         self.rotor_1_spinner.setMinimum(1)
         self.rotor_1_spinner.setMaximum(8)
         self.rotor_1_spinner.setValue(1)
@@ -49,8 +57,7 @@ class EnigmaKey(BaseKey):
         self.rotor_1_group.addWidget(self.rotor_1_offset)
 
         self.rotor_2_lbl = QLabel('Rotor 2:')
-        self.rotor_2_spinner = RotorSpinner(
-            ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
+        self.rotor_2_spinner = RotorSpinner(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
         self.rotor_2_spinner.setMinimum(1)
         self.rotor_2_spinner.setMaximum(8)
         self.rotor_2_spinner.setValue(1)
@@ -65,8 +72,7 @@ class EnigmaKey(BaseKey):
         self.rotor_2_group.addWidget(self.rotor_2_offset)
 
         self.rotor_3_lbl = QLabel('Rotor 3:')
-        self.rotor_3_spinner = RotorSpinner(
-            ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
+        self.rotor_3_spinner = RotorSpinner(['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'])
         self.rotor_3_spinner.setMinimum(1)
         self.rotor_3_spinner.setMaximum(8)
         self.rotor_3_spinner.setValue(1)
@@ -94,8 +100,7 @@ class EnigmaKey(BaseKey):
         self.reflector_group.addWidget(self.reflector_lbl)
         self.reflector_group.addWidget(self.reflector_spinner)
 
-        self.spacer = QSpacerItem(10, 10, QSizePolicy.Expanding,
-                                  QSizePolicy.Expanding)
+        self.spacer = QSpacerItem(10, 10, QSizePolicy.Expanding, QSizePolicy.Expanding)
 
         self.v_layout = QVBoxLayout()
         self.v_layout.addWidget(QLabel('Based on Enigma Machine M3'))
@@ -106,12 +111,14 @@ class EnigmaKey(BaseKey):
 
     def build_key(self):
 
-        return Key(KeyType.NUMBER, [
-            self.rotor_1_spinner.value() - 1,
-            ord(self.rotor_1_offset.text()) - ord('a'),
-            self.rotor_2_spinner.value() - 1,
-            ord(self.rotor_2_offset.text()) - ord('a'),
-            self.rotor_3_spinner.value() - 1,
-            ord(self.rotor_3_offset.text()) - ord('a'),
-            self.reflector_spinner.value() - 1
-        ])
+        return Key(
+            KeyType.NUMBER, [
+                self.rotor_1_spinner.value() - 1,
+                ord(self.rotor_1_offset.text()) - ord('a'),
+                self.rotor_2_spinner.value() - 1,
+                ord(self.rotor_2_offset.text()) - ord('a'),
+                self.rotor_3_spinner.value() - 1,
+                ord(self.rotor_3_offset.text()) - ord('a'),
+                self.reflector_spinner.value() - 1
+            ]
+        )
