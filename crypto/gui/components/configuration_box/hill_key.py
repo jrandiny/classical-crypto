@@ -34,6 +34,14 @@ class HillKey(BaseKey):
         self.matrix.itemChanged.connect(self.update_alignment)
         self.update_matrix(2)
 
+    def apply_key(self, key):
+        dim = key.data[0]
+        self.spin_box.setValue(key.data[0])
+        for i in range(dim):
+            for j in range(dim):
+                el = QTableWidgetItem(str(key.data[i * dim + j + 1]))
+                self.matrix.setItem(i, j, el)
+
     def build_key(self):
         dim = self.spin_box.value()
         key = [dim]
@@ -43,7 +51,7 @@ class HillKey(BaseKey):
                 el = self.matrix.item(i, j)
                 key.append(int(el.text()))
 
-        return Key(KeyType.STRING, key)
+        return Key(KeyType.NUMBER, key)
 
     def update_matrix(self, dim: int):
         self.matrix.setRowCount(dim)
