@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QSizePolicy
 from PyQt5.QtCore import QSize, Qt
 from PyQt5.QtGui import QClipboard, QGuiApplication
 
@@ -19,14 +19,20 @@ class InputString(QWidget):
         self.text_edit.setAcceptRichText(False)
         self.text_edit.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
 
-        self.copy_button = QPushButton('Copy to Clipboard')
+        self.btn_copy_clipboard = QPushButton('Copy to Clipboard')
 
-        self.layout = QVBoxLayout()
-        self.layout.addWidget(self.text_edit)
-        self.layout.addWidget(self.copy_button)
-        self.setLayout(self.layout)
+        self.h_layout = QHBoxLayout()
+        if not self.enabled:
+            self.btn_copy_field = QPushButton('Copy to Input')
+            self.h_layout.addWidget(self.btn_copy_field)
+        self.h_layout.addWidget(self.btn_copy_clipboard)
 
-        self.copy_button.clicked.connect(self.copy_to_clipboard)
+        self.v_layout = QVBoxLayout()
+        self.v_layout.addWidget(self.text_edit)
+        self.v_layout.addLayout(self.h_layout)
+        self.setLayout(self.v_layout)
+
+        self.btn_copy_clipboard.clicked.connect(self.copy_to_clipboard)
 
     def copy_to_clipboard(self):
         text = self.text_edit.toPlainText()

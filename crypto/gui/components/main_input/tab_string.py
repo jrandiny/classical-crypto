@@ -23,3 +23,9 @@ class TabString(QWidget):
         self.layout.addWidget(self.output_string)
 
         self.setLayout(self.layout)
+
+        self.output_string.btn_copy_field.clicked.connect(self.copy_output_to_input)
+
+    def copy_output_to_input(self):
+        output = self.output_string.text_edit.toPlainText()
+        self.input_string.text_edit.setText(output)
