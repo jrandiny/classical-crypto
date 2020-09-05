@@ -71,7 +71,7 @@ class EnigmaEngine(BaseEngine):
         if len(args) == 0:
             super().__init__(
                 EngineCapabilities(
-                    support_file=False, support_text=True, key_type=KeyType.NUMBER, key_length=6
+                    support_file=False, support_text=True, key_type=KeyType.NUMBER, key_length=7
                 )
             )
         else:
@@ -86,6 +86,7 @@ class EnigmaEngine(BaseEngine):
                 random.randint(0, 25),
                 random.randint(0, 7),
                 random.randint(0, 25),
+                random.randint(0, 1),
             ]
         )
 
@@ -124,14 +125,14 @@ class EnigmaEngine(BaseEngine):
 
     def _init_key(self, key: Key) -> List[EnigmaRotor]:
         enigma_rotor = []
-        for rotor_index, rotation in zip(key.data[::2], key.data[1::2]):
+        rotor_config = key.data[:-1]
+        for rotor_index, rotation in zip(rotor_config[::2], rotor_config[1::2]):
             config = self._standard_rotor[rotor_index]
             temp_rotor = EnigmaRotor(config[0], config[1], config[2])
             temp_rotor.set_rotation(rotation)
             enigma_rotor.append(temp_rotor)
 
-        enigma_rotor.append(
-            EnigmaRotor(self._standar_reflector[0][0], self._standar_reflector[0][1], [])
-        )
+        reflector_config = self._standar_reflector[key.data[-1]]
+        enigma_rotor.append(EnigmaRotor(reflector_config[0], reflector_config[1], []))
 
         return enigma_rotor
