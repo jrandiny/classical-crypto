@@ -40,7 +40,7 @@ def test_generate_key():
     assert generated_key.data[3] >= 0 and generated_key.data[3] <= 25
     assert generated_key.data[4] >= 0 and generated_key.data[4] <= 7
     assert generated_key.data[5] >= 0 and generated_key.data[5] <= 25
-    assert generated_key.data[6] >= 0 and generated_key.data[5] <= 1
+    assert generated_key.data[6] >= 0 and generated_key.data[6] <= 1
 
 
 def test_encrypt_decrypt():
