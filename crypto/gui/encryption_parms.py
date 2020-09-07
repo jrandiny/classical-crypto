@@ -30,25 +30,30 @@ class EncryptionParms:
         else:
             EncryptionParms.__instance = self
             self.mode = None
+            self.engine = None
             self.engine_type = None
+            self.old_engine_type = None
             self.output_conf = None
-            self.file_in_path = None
-            self.file_out_path = None
 
     def print_info(self):
         print('***Encryption Parameters***')
         print('Mode:', self.mode)
         print('Engine Type:', self.engine_type)
         print('Output Configuration:', self.output_conf)
-        print('Input Path:', self.file_in_path)
-        print('Output Path:', self.file_out_path)
         print('***************************')
+
+    def update_engine_type(self, engine_type: EngineType):
+        self.old_engine_type = self.engine_type
+        self.engine_type = engine_type
 
     def is_parameter_valid(self) -> bool:
         return True
 
     def get_engine(self) -> BaseEngine:
-        return EngineFactory.create_engine(self.engine_type)
+        if self.engine_type == self.old_engine_type:
+            return self.engine
+        else:
+            return EngineFactory.create_engine(self.engine_type)
 
     @staticmethod
     def get_instance() -> EncryptionParms:

@@ -32,4 +32,4 @@ class AlgorithmList(QGroupBox):
         self.btn_group.idClicked.connect(self.set_engine_type)
 
     def set_engine_type(self, id):
-        EncryptionParms.get_instance().engine_type = self.list_of_algorithm[id]
+        EncryptionParms.get_instance().update_engine_type(self.list_of_algorithm[id])
