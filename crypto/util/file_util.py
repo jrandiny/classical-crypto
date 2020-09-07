@@ -8,3 +8,12 @@ class FileUtil:
     @staticmethod
     def generate_temp_file() -> BinaryIO:
         return tempfile.NamedTemporaryFile(delete=False)
+
+    @staticmethod
+    def with_move_file(exec_func, filepath):
+        def wrapper(*args, **kwargs):
+            result = exec_func(*args, **kwargs)
+            result.move_file(filepath)
+            return f'Execution complete. File saved in {filepath}.'
+
+        return wrapper
