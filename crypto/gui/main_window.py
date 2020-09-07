@@ -50,7 +50,9 @@ class MainWindow(QMainWindow):
 
         engine_type_signal = self.algorithm_list.btn_group.idClicked
         engine_type_slot = self.configuration_box.encryption_box.on_update_key_widget
+        engine_type_slot_2 = self.main_input.on_engine_change
         engine_type_signal.connect(engine_type_slot)
+        engine_type_signal.connect(engine_type_slot_2)
 
     def show_dialog_window(self, title, msg):
         DialogWindow(title, msg).exec_()

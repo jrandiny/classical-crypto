@@ -12,12 +12,17 @@ class TabFile(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
+        self.lbl_msg = QLabel('File input must use \nExtended Vigenere Cipher Algorithm')
+        self.lbl_msg.setWordWrap(True)
+        self.lbl_msg.setAlignment(QtCore.Qt.AlignCenter)
         self.input_file = InputFile('Import')
         self.output_file = InputFile('Browse')
         self.input_mode = InputMode()
 
         self.layout = QVBoxLayout()
         self.layout.addSpacerItem(QSpacerItem(30, 30, QSizePolicy.Expanding, QSizePolicy.MinimumExpanding))
+        self.layout.addWidget(self.lbl_msg)
+        self.layout.addSpacerItem(QSpacerItem(30, 50, QSizePolicy.Expanding, QSizePolicy.Fixed))
         self.layout.addWidget(self.input_file)
         self.layout.addWidget(self.output_file)
         self.layout.addSpacerItem(QSpacerItem(30, 50, QSizePolicy.Expanding, QSizePolicy.Fixed))
