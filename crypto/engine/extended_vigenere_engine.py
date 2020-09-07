@@ -39,7 +39,9 @@ class ExtendedVigenereEngine(VigenereEngine):
             input_handle.seek(0, os.SEEK_END)
             file_size = input_handle.tell()
 
+            key_length = len(key.data[0])
             chunk_size = min(20000000, file_size)
+            chunk_size += chunk_size % key_length
 
             input_handle.seek(0)
 
@@ -81,7 +83,9 @@ class ExtendedVigenereEngine(VigenereEngine):
             input_handle.seek(0, os.SEEK_END)
             file_size = input_handle.tell()
 
+            key_length = len(key.data[0])
             chunk_size = min(20000000, file_size)
+            chunk_size += chunk_size % key_length
 
             input_handle.seek(0)
 
