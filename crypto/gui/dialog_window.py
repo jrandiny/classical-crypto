@@ -6,7 +6,6 @@ class DialogWindow(QDialog):
     def __init__(self, title: str, desc: str):
         super(DialogWindow, self).__init__()
         dim = QApplication.desktop().screenGeometry()
-        self.size = (dim.width() // 7, dim.height() // 7)
 
         self.title = title
         self.desc = desc
@@ -28,6 +27,5 @@ class DialogWindow(QDialog):
         self.layout.setSpacing(10)
 
         self.layout.addWidget(self.lbl_dec)
+        self.layout.addWidget(self.btn_ok)
         self.setLayout(self.layout)
-
-        self.setFixedSize(self.size[0], self.size[1])
