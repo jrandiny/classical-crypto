@@ -32,4 +32,4 @@ class PostProcessing(QGroupBox):
         self.btn_group.idClicked.connect(self.set_output_type)
 
     def set_output_type(self, id):
-        EncryptionParms.get_instance().output_conf = self.output_type_list[id]
+        EncryptionParms.get_instance().update_output_type(self.output_type_list[id])

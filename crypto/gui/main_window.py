@@ -44,11 +44,11 @@ class MainWindow(QMainWindow):
         self.main_input.tab_string.input_mode.btn_execute.clicked.connect(self.execute_string)
         self.main_input.tab_file.input_mode.btn_execute.clicked.connect(self.execute_file)
 
-        output_conf_signal = self.configuration_box.post_processing.btn_group.idClicked
+        output_conf_signal = EncryptionParms.get_instance().signal.output_type
         output_conf_slot = self.main_input.tab_string.output_string.on_change_format
         output_conf_signal.connect(output_conf_slot)
 
-        engine_type_signal = self.algorithm_list.btn_group.idClicked
+        engine_type_signal = EncryptionParms.get_instance().signal.engine_type
         engine_type_slot = self.configuration_box.encryption_box.on_update_key_widget
         engine_type_slot_2 = self.main_input.on_engine_change
         engine_type_signal.connect(engine_type_slot)

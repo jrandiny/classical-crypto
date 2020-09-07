@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QSizePolicy
-from PyQt5.QtCore import QSize, Qt
+from PyQt5.QtCore import QSize, Qt, pyqtSlot
 from PyQt5.QtGui import QClipboard, QGuiApplication
 
 from crypto.engine.data import Data, DataType
@@ -41,6 +41,7 @@ class InputString(QWidget):
         clip_board.clear(mode=clip_board.Clipboard)
         clip_board.setText(text, mode=clip_board.Clipboard)
 
+    @pyqtSlot(object)
     def on_result_update(self, result: Data):
         if EncryptionParms.get_instance().output_conf == OutputType.NO_SPACE:
             updated_text = StringUtil.remove_space(result.text)
@@ -48,8 +49,8 @@ class InputString(QWidget):
             updated_text = StringUtil.split_to_group(result.text, 5)
         self.text_edit.setPlainText(updated_text)
 
-    def on_change_format(self, id: int):
-        mode = OutputType.list()[id]
+    @pyqtSlot(object)
+    def on_change_format(self, mode: OutputType):
         text = self.text_edit.toPlainText()
 
         if mode == OutputType.NO_SPACE:

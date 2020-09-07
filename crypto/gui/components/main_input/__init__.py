@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QGroupBox, QWidget, QVBoxLayout, QTabWidget, QSizePolicy
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QSize, pyqtSlot
 
 from crypto.gui.components.main_input.tab_file import TabFile
 from crypto.gui.components.main_input.tab_string import TabString
@@ -10,7 +10,6 @@ from crypto.engine.data import Data
 class MainInput(QTabWidget):
     def __init__(self, parent: QWidget = None):
         super(MainInput, self).__init__(parent=parent)
-        self.engine_type_list = EngineType.list()
         self.setup_ui()
 
     def setup_ui(self):
@@ -20,8 +19,8 @@ class MainInput(QTabWidget):
         self.addTab(self.tab_file, 'File Input')
         self.setCurrentIndex(0)
 
-    def on_engine_change(self, engine_type_id):
-        engine_type = self.engine_type_list[engine_type_id]
+    @pyqtSlot(object)
+    def on_engine_change(self, engine_type):
         if engine_type == EngineType.VIGENERE_EXTENDED:
             self.tab_file.setEnabled(True)
         else:

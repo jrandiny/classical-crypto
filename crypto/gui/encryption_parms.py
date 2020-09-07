@@ -1,10 +1,16 @@
 from __future__ import annotations
 from enum import Enum
+from PyQt5.QtCore import pyqtSignal, QObject
 
 from crypto.engine.engine_factory import *
 from crypto.engine.base_engine import BaseEngine
 from crypto.engine.data import *
 from crypto.engine.key import *
+
+
+class ParamsSignal(QObject):
+    engine_type = pyqtSignal(object)
+    output_type = pyqtSignal(object)
 
 
 class ModeType(Enum):
@@ -29,6 +35,7 @@ class EncryptionParms:
             raise Exception('Only allowed 1 instance')
         else:
             EncryptionParms.__instance = self
+            self.signal = ParamsSignal()
             self.mode = None
             self.engine = None
             self.engine_type = None
@@ -45,6 +52,11 @@ class EncryptionParms:
     def update_engine_type(self, engine_type: EngineType):
         self.old_engine_type = self.engine_type
         self.engine_type = engine_type
+        self.signal.engine_type.emit(engine_type)
+
+    def update_output_type(self, output_type: OutputType):
+        self.output_conf = output_type
+        self.signal.output_type.emit(output_type)
 
     def is_parameter_valid(self) -> bool:
         return True
