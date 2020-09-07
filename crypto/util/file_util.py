@@ -10,6 +10,13 @@ class FileUtil:
         return tempfile.NamedTemporaryFile(delete=False)
 
     @staticmethod
+    def read_file(path: str) -> str:
+        with open(path, 'r') as file:
+            data = file.read()
+
+        return data
+
+    @staticmethod
     def with_move_file(exec_func, filepath):
         def wrapper(*args, **kwargs):
             result = exec_func(*args, **kwargs)

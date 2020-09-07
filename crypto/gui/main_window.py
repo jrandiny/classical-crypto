@@ -1,5 +1,5 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QMainWindow, QHBoxLayout
+from PyQt5.QtWidgets import QMainWindow, QHBoxLayout, QFileDialog
 from PyQt5.QtCore import QSize, QThreadPool
 
 from crypto.gui.components.algorithm_list import AlgorithmList
@@ -44,6 +44,11 @@ class MainWindow(QMainWindow):
         self.main_input.tab_string.input_mode.btn_execute.clicked.connect(self.execute_string)
         self.main_input.tab_file.input_mode.btn_execute.clicked.connect(self.execute_file)
 
+        self.main_input.tab_string.input_string.btn_load_from_file.clicked.connect(
+            self.load_from_file
+        )
+        self.main_input.tab_string.output_string.btn_save_to_file.clicked
+
         output_conf_signal = EncryptionParms.get_instance().signal.output_type
         output_conf_slot = self.main_input.tab_string.output_string.on_change_format
         output_conf_signal.connect(output_conf_slot)
@@ -62,6 +67,21 @@ class MainWindow(QMainWindow):
 
     def show_success_window(self, msg):
         self.show_dialog_window('Success', msg)
+
+    def load_from_file(self):
+        filepath, _ = QFileDialog.getOpenFileName(
+            self, 'Load Text', QtCore.QDir.currentPath(), '*.txt'
+        )
+        if filepath:
+            worker = Worker(FileUtil.read_file, filepath)
+            worker.signals.error.connect(self.show_error_dialog)
+            worker.signals.result.connect(self.main_input.tab_string.input_string.on_load_from_file)
+            QThreadPool.globalInstance().start(worker)
+
+    def save_to_file(self):
+        filepath, _ = QFileDialog.getSaveFileName(self, 'Save Text', QDir.currentPath(), '*')
+        if filepath:
+            pass
 
     def prepare_exec_fun(self):
         mode = self.enc_parms.mode
