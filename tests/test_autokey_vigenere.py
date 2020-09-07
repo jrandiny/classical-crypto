@@ -14,44 +14,21 @@ def test_init():
     assert engine.capabilities.support_text == True
 
 
-def test_invalid_key():
-    engine = AutokeyVigenereEngine()
-
-    test_key = Key(KeyType.STRING, ['key'])
-    test_data = Data(DataType.TEXT, 'Example text')
-    completed_key = engine.complete_key(test_data, test_key)
-
-    with pytest.raises(Exception):
-        engine.encrypt(test_data, test_key)
-
-
 def test_encrypt_decrypt():
     engine = AutokeyVigenereEngine()
 
     test_key = Key(KeyType.STRING, ['key'])
     test_data = Data(DataType.TEXT, 'Example text')
-    completed_key = engine.complete_key(test_data, test_key)
+    # completed_key = engine.complete_key(test_data, test_key)
 
     expected_result = 'obyqmlqipbm'
 
-    result = engine.encrypt(test_data, completed_key)
+    result = engine.encrypt(test_data, test_key)
 
     assert result.data_type == DataType.TEXT
     assert result.text == expected_result
 
-    decrypted_result = engine.decrypt(result, completed_key)
+    decrypted_result = engine.decrypt(result, test_key)
 
     assert decrypted_result.data_type == DataType.TEXT
     assert decrypted_result.text == 'exampletext'
-
-
-def test_complete_key():
-    engine = AutokeyVigenereEngine()
-
-    test_key = Key(KeyType.STRING, ['key'])
-    test_data = Data(DataType.TEXT, 'Example text')
-    completed_key = engine.complete_key(test_data, test_key)
-
-    assert completed_key.key_type == KeyType.STRING
-    assert len(completed_key.data) == 1
-    assert completed_key.data[0] == 'keyexamplet'
