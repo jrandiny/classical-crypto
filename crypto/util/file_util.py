@@ -17,6 +17,11 @@ class FileUtil:
         return data
 
     @staticmethod
+    def save_file(path: str, data: str):
+        with open(path, 'w') as file:
+            file.write(data)
+
+    @staticmethod
     def with_move_file(exec_func, filepath):
         def wrapper(*args, **kwargs):
             result = exec_func(*args, **kwargs)

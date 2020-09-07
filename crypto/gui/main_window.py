@@ -44,10 +44,10 @@ class MainWindow(QMainWindow):
         self.main_input.tab_string.input_mode.btn_execute.clicked.connect(self.execute_string)
         self.main_input.tab_file.input_mode.btn_execute.clicked.connect(self.execute_file)
 
+        self.main_input.tab_string.output_string.btn_save_to_file.clicked.connect(self.save_to_file)
         self.main_input.tab_string.input_string.btn_load_from_file.clicked.connect(
             self.load_from_file
         )
-        self.main_input.tab_string.output_string.btn_save_to_file.clicked
 
         output_conf_signal = EncryptionParms.get_instance().signal.output_type
         output_conf_slot = self.main_input.tab_string.output_string.on_change_format
@@ -79,9 +79,15 @@ class MainWindow(QMainWindow):
             QThreadPool.globalInstance().start(worker)
 
     def save_to_file(self):
-        filepath, _ = QFileDialog.getSaveFileName(self, 'Save Text', QDir.currentPath(), '*')
+        filepath, _ = QFileDialog.getSaveFileName(self, 'Save Text', QtCore.QDir.currentPath(), '*')
         if filepath:
-            pass
+            worker = Worker(
+                FileUtil.save_file, filepath,
+                self.main_input.tab_string.output_string.text_edit.toPlainText()
+            )
+            worker.signals.error.connect(self.show_error_dialog)
+            worker.signals.result.connect(lambda: self.show_success_window("Success saving file"))
+            QThreadPool.globalInstance().start(worker)
 
     def prepare_exec_fun(self):
         mode = self.enc_parms.mode
