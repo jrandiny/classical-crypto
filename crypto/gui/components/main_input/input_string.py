@@ -5,6 +5,7 @@ from PyQt5.QtGui import QClipboard, QGuiApplication
 from crypto.engine.data import Data, DataType
 from crypto.gui.encryption_parms import OutputType
 from crypto.util.string_util import StringUtil
+from crypto.gui.encryption_parms import EncryptionParms, OutputType
 
 
 class InputString(QWidget):
@@ -40,12 +41,12 @@ class InputString(QWidget):
         clip_board.clear(mode=clip_board.Clipboard)
         clip_board.setText(text, mode=clip_board.Clipboard)
 
-    def get_data(self) -> Data:
-        text = self.text_edit.toPlainText()
-        return Data(DataType.TEXT, text)
-
     def on_result_update(self, result: Data):
-        self.text_edit.setPlainText(result.text)
+        if EncryptionParms.get_instance().output_conf == OutputType.NO_SPACE:
+            updated_text = StringUtil.remove_space(result.text)
+        else:
+            updated_text = StringUtil.split_to_group(result.text, 5)
+        self.text_edit.setPlainText(updated_text)
 
     def on_change_format(self, id: int):
         mode = OutputType.list()[id]
