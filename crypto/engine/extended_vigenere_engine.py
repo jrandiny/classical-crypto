@@ -9,6 +9,7 @@ from nptyping import NDArray
 import numpy as np
 import random
 import string
+import os
 
 
 class ExtendedVigenereEngine(VigenereEngine):
@@ -35,13 +36,29 @@ class ExtendedVigenereEngine(VigenereEngine):
             output_handle = FileUtil.generate_temp_file()
             output_path = output_handle.name
 
-            input_array = np.fromfile(input_handle, np.uint8)
-            full_key_array = self._transform_key(key, len(input_array), np.uint8)
+            input_handle.seek(0, os.SEEK_END)
+            file_size = input_handle.tell()
 
-            encrypted_array = input_array + full_key_array
+            chunk_size = min(20000000, file_size)
 
-            encrypted_array.tofile(output_handle)
+            input_handle.seek(0)
 
+            for i in range(0, file_size + 1, chunk_size):
+                output_handle.seek(i)
+                input_handle.seek(i)
+
+                bytes_left = file_size - i
+                seek_count = min(chunk_size, bytes_left)
+
+                input_array = np.fromfile(input_handle, count=seek_count, dtype=np.uint8)
+                full_key_array = self._transform_key(key, len(input_array), np.uint8)
+
+                encrypted_array = input_array + full_key_array
+
+                encrypted_array.tofile(output_handle)
+
+            output_handle.seek(0, os.SEEK_END)
+            input_handle.seek(0, os.SEEK_END)
             input_handle.close()
             output_handle.close()
 
@@ -61,13 +78,29 @@ class ExtendedVigenereEngine(VigenereEngine):
             output_handle = FileUtil.generate_temp_file()
             output_path = output_handle.name
 
-            input_array = np.fromfile(input_handle, np.uint8)
-            full_key_array = self._transform_key(key, len(input_array), np.uint8)
+            input_handle.seek(0, os.SEEK_END)
+            file_size = input_handle.tell()
 
-            decrypted_array = input_array - full_key_array
+            chunk_size = min(20000000, file_size)
 
-            decrypted_array.tofile(output_handle)
+            input_handle.seek(0)
 
+            for i in range(0, file_size + 1, chunk_size):
+                output_handle.seek(i)
+                input_handle.seek(i)
+
+                bytes_left = file_size - i
+                seek_count = min(chunk_size, bytes_left)
+
+                input_array = np.fromfile(input_handle, count=seek_count, dtype=np.uint8)
+                full_key_array = self._transform_key(key, len(input_array), np.uint8)
+
+                decrypted_array = input_array - full_key_array
+
+                decrypted_array.tofile(output_handle)
+
+            output_handle.seek(0, os.SEEK_END)
+            input_handle.seek(0, os.SEEK_END)
             input_handle.close()
             output_handle.close()
 
