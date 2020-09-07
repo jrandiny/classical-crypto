@@ -21,7 +21,10 @@ class HillEngine(BaseEngine):
 
     def generate_random_key(self) -> Key:
         # Key consists of consecutively n and one matrix object of n x n
-        return Key(KeyType.NUMBER, [3, 17, 17, 5, 21, 18, 21, 2, 2, 19])
+        key_param = [3]
+        for _ in range(9):
+            key_param.append(random.randint(0, 25))
+        return Key(KeyType.NUMBER, key_param)
 
     def _do_encrypt(self, data: Data, key: Key) -> Data:
         """Encrypt data"""
