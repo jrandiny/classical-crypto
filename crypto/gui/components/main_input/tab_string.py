@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt
 from crypto.gui.components.main_input.input_string import InputString
 from crypto.gui.components.main_input.input_mode import InputMode
 from crypto.gui.encryption_parms import EncryptionParms
+from crypto.engine.data import *
 
 
 class TabString(QWidget):
@@ -29,3 +30,7 @@ class TabString(QWidget):
     def copy_output_to_input(self):
         output = self.output_string.text_edit.toPlainText()
         self.input_string.text_edit.setText(output)
+
+    def build_data(self):
+        text = self.input_string.text_edit.toPlainText()
+        return Data(DataType.TEXT, text)

@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QHBoxLayout, QVBoxLayout, QLab
 
 from crypto.gui.components.main_input.input_file import InputFile
 from crypto.gui.components.main_input.input_mode import InputMode
-from crypto.gui.encryption_parms import EncryptionParms
+from crypto.engine.data import *
 
 
 class TabFile(QWidget):
@@ -32,11 +32,13 @@ class TabFile(QWidget):
         if is_input:
             filepath, _ = QFileDialog.getOpenFileName(self, 'Single File', QtCore.QDir.currentPath(), '*')
             if filepath:
-                EncryptionParms.get_instance().file_in_path = filepath
                 self.input_file.line_edit.setText(filepath)
         else:
             default_name = 'cipher_out'
             filepath, _ = QFileDialog.getSaveFileName(self, 'Save File', QtCore.QDir.currentPath() + '/' + default_name)
             if filepath:
-                EncryptionParms.get_instance().file_out_path = filepath
                 self.output_file.line_edit.setText(filepath)
+
+    def build_data(self) -> Data:
+        filepath = self.input_file.line_edit.text()
+        return Data(DataType.FILE, filepath)
